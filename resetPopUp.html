@@ -1,0 +1,26 @@
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm applyPosition" role="document">
+        <div class="modal-content resetModalContent resetPopUpContent">
+            <div class="modal-header">
+                <button type="button" class="close modalCloseBtn focusable" data-dismiss="modal">
+                    <img src="images/closeIcon.png" data-alt="ALT_CLOSE" />
+                </button>
+                <h4 class="modal-title" data-label="FACTORY_RESET"></h4>
+            </div>
+            <div class="modal-body resetPopupBtn">
+                <p>Press the Reset button on your router for ~10 seconds to restore factory settings.</p>
+                <button type="button" class="btn btn-default focusable" onclick="showResetText()">
+                    Show instructions
+                </button>
+            </div>
+            <div id="resetPopUpImageContent" class="hideInstResetBtn" style="display:none;">
+                <img class="reset_image_switch_pl reset_image_switch_cz reset_image_switch_sk
+                            reset_image_switch_hr reset_image_switch_mk reset_image_switch_me
+                            reset_image_switch_gr"
+                     src="images/resetImg_PL.png" alt="reset instruction"/>
+                <button type="button" class="btn btn-default focusable" onclick="hideResetText()">OK</button>
+            </div>
+            <div id="resetPopUpWithoutImageContent"></div>
+        </div>
+    </div>
+</div>

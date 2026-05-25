@@ -1,0 +1,2197 @@
+/*Fonts Start*/
+@font-face {
+    font-family: TeleNeoBold;
+    src: url("fonts/TeleNeoWeb-Bold.eot");
+    src: url("fonts/TeleNeoWeb-Bold.woff");
+    src: url("fonts/TeleNeoWeb-Bold.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoBoldItalic;
+    src: url("fonts/TeleNeoWeb-BoldItalic.eot");
+    src: url("fonts/TeleNeoWeb-BoldItalic.woff");
+    src: url("fonts/TeleNeoWeb-BoldItalic.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoExtraBold;
+    src: url("fonts/TeleNeoWeb-ExtraBold.eot");
+    src: url("fonts/TeleNeoWeb-ExtraBold.woff");
+    src: url("fonts/TeleNeoWeb-ExtraBold.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoExtraBoldItalic;
+    src: url("fonts/TeleNeoWeb-ExtraBoldItalic.eot");
+    src: url("fonts/TeleNeoWeb-ExtraBoldItalic.woff");
+    src: url("fonts/TeleNeoWeb-ExtraBoldItalic.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoMedium;
+    src: url("fonts/TeleNeoWeb-Medium.eot");
+    src: url("fonts/TeleNeoWeb-Medium.woff");
+    src: url("fonts/TeleNeoWeb-Medium.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoMediumItalic;
+    src: url("fonts/TeleNeoWeb-MediumItalic.eot");
+    src: url("fonts/TeleNeoWeb-MediumItalic.woff");
+    src: url("fonts/TeleNeoWeb-MediumItalic.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoRegular;
+    src: url("fonts/TeleNeoWeb-Regular.eot");
+    src: url("fonts/TeleNeoWeb-Regular.woff");
+    src: url("fonts/TeleNeoWeb-Regular.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoRegularItalic;
+    src: url("fonts/TeleNeoWeb-RegularItalic.eot");
+    src: url("fonts/TeleNeoWeb-RegularItalic.woff");
+    src: url("fonts/TeleNeoWeb-RegularItalic.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoThin;
+    src: url("fonts/TeleNeoWeb-Thin.eot");
+    src: url("fonts/TeleNeoWeb-Thin.woff");
+    src: url("fonts/TeleNeoWeb-Thin.woff2");
+}
+
+@font-face {
+    font-family: TeleNeoThinItalic;
+    src: url("fonts/TeleNeoWeb-ThinItalic.eot");
+    src: url("fonts/TeleNeoWeb-ThinItalic.woff");
+    src: url("fonts/TeleNeoWeb-ThinItalic.woff2");
+}
+
+@font-face {
+    font-family: BTCosmo;
+    src: url("fonts/BTCosmo-Bold.woff");
+    src: url("fonts/BTCosmo-Bold.woff2");
+}
+
+@font-face {
+    font-family: PeridotPEBold;
+    src: url("fonts/PeridotPE-Bold.woff");
+    src: url("fonts/PeridotPE-Bold.woff2");
+}
+
+@font-face {
+    font-family: PeridotPERegular;
+    src: url("fonts/PeridotPE-Regular.woff");
+    src: url("fonts/PeridotPE-Regular.woff2");
+}
+
+@font-face {
+    font-family: PeridotPEExtraBold;
+    src: url("fonts/PeridotPE-ExtraBold.woff");
+    src: url("fonts/PeridotPE-ExtraBold.woff2");
+}
+
+@font-face {
+    font-family: PeridotPEBoldItalic;
+    src: url("fonts/PeridotPE-BoldItalic.woff");
+    src: url("fonts/PeridotPE-BoldItalic.woff2");
+}
+
+@font-face {
+    font-family: PeridotPEItalic;
+    src: url("fonts/PeridotPE-Italic.woff");
+    src: url("fonts/PeridotPE-Italic.woff2");
+}
+
+@font-face {
+    font-family: PeridotPESemiBold;
+    src: url("fonts/PeridotPE-SemiBold.woff");
+    src: url("fonts/PeridotPE-SemiBold.woff2");
+}
+
+@font-face {
+    font-family: PeridotPESemiBoldItalic;
+    src: url("fonts/PeridotPE-SemiBoldItalic.woff");
+    src: url("fonts/PeridotPE-SemiBoldItalic.woff2");
+}
+
+@font-face {
+    font-family: PeridotPEExtraBoldItalic;
+    src: url("fonts/PeridotPE-ExtraBoldItalic.woff");
+    src: url("fonts/PeridotPE-ExtraBoldItalic.woff2");
+}
+
+body{
+    background-color: #EDEDED;
+}
+
+body:before{
+    content: '';
+    height: 456px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+.container-fluid{
+    position:relative;
+    z-index:1000;
+}
+
+.dropdown-menu{
+    background-color: #e20074;
+    min-width: 80px;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu > li > a.hovered{
+    color: #fff;
+    text-decoration: none;
+    background-color: #ce046c;
+}
+
+/* Override hovered, focus, and hover styles only for menu2 inside #gr_header */
+#gr_header .dropdown-menu > li > a:focus,
+#gr_header .dropdown-menu > li > a:hover,
+#gr_header .dropdown-menu > li > a.hovered {
+    color: #fff;
+    text-decoration: none;
+    background-color: #31A735 !important; /* green for menu2 */
+}
+
+.dropdown-menu>li>a{
+    padding: 3px 10px;
+    color:#fff;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 24px;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+.header_css button{
+    border: 1px solid #fff;
+    background-color: transparent;
+    width: 100%;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.header_css .language-selection{
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.header_css .restart-router{
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+    font-weight: bold;
+}
+
+.header_css{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.cont_wdth{
+    background-color: #fff;
+    min-height: 590px;
+    margin: auto;
+    width: 850px;
+    border-radius: 5px;
+    padding: 25px;
+    overflow: auto;
+}
+
+.big_txt{
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 48px;
+    letter-spacing: -0.75px;
+    line-height: 72px;
+    text-align: center;
+    color: #fff;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 50px;
+    margin-top: 64px;
+}
+
+.left_section{
+    padding-top: 25px;
+    text-align: center;
+}
+
+.text_rd{
+    color: #6C6C6C;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 16px;
+    text-align: center;
+}
+
+.right_section h4{
+    font-family: TeleNeoExtraBold, sans-serif;
+    color: #262626;
+    font-size: 32px;
+    overflow-wrap: break-word;
+    letter-spacing: -0.5px;
+    line-height: 38px;
+}
+
+.right_section h6, .ipv6_span{
+    padding: 0px;
+    margin-top: 10px;
+}
+
+.right_section h6, .ipv6_h5{
+    padding: 0px;
+}
+
+.right_section h5 .ip_value{
+    color: #262626;
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 30px;
+}
+
+.right_section ul li:last-child{
+    border-bottom: none;
+}
+
+.dig_btn{
+    margin-top: 20px;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+	border-color: #000000;
+}
+
+.ref_txt{
+    padding-top: 18px;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+}
+
+.gr_bg{
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px 0px #888888;
+    padding: 25px 25px 25px 25px;
+}
+
+/* Default (English) */
+.gr_height {
+    margin-bottom: 12px !important;
+}
+
+/* Override for Greek (lang="el") */
+html[lang="el"] .gr_height {
+    margin-top: 6px !important;
+    margin-bottom: 0px !important;
+}
+
+.blu_bg{
+    background-color: #69A2DB;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px 0px #888888;
+    padding: 5px 25px 0px 25px;
+    overflow: auto;
+}
+
+.gv_wdth{
+    width: 850px;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.gv_wdth>div:last-child{
+    padding-right: 0px;
+}
+
+.gv_wdth>div{
+    padding-left: 0px;
+}
+
+.gr_bg h4{
+    margin: 0px;
+    margin-bottom: 5px;
+    color: #262626;
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+.gr_bg h6{
+    margin: 0px;
+    margin-top: 18px;
+    color: #262626;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+.gr_bg h2 {
+    color: #000000;
+    font-family: TeleNeoExtraBold, sans-serif;
+    letter-spacing: 0;
+    margin: 0px;
+    margin-top: 4px;
+}
+
+.mgnt {
+    color: #E20074 !important;
+}
+
+html[lang="sq"] #mk_h2 {
+    margin-top: 12px;
+}
+
+html[lang="en"] #mk_h2 {
+    margin-top: 36px;
+}
+
+html[lang="mk"] #mk_h2 {
+    margin-top: 12px;
+}
+
+#gr_h2{
+    margin-top: 18px;
+}
+
+.blu_bg h3{
+    margin: 0px;
+    color: #000000;
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 28px;
+    position: relative;
+    height: 56px;
+    top: 10px;
+}
+.blu_bg h6{
+    margin-bottom: 0px;
+    color: #000000;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    top: 10px;
+    margin-top: 0px;
+}
+
+html[lang="hr"] .blu_bg h6 {
+    margin-top: 32px !important;
+}
+
+html[lang="hr"] .cust_msg_middle{
+    margin-top: 30px;
+    margin-bottom: 23px;
+}
+
+.gr_bg h2 img{
+    margin-top: -5px;
+    width: 28px;
+}
+
+.blu_bg .playstore{
+    padding-left:0px;
+}
+
+.blu_bg .hr_playstore,.blu_bg .cz_playstore, .blu_bg .sk_playstore, .blu_bg .me_playstore,.blu_bg .mk_playstore{
+    padding-left: 0px;
+    margin-top: 25px !important;
+}
+
+.blu_bg .hr_playstore_img,.blu_bg .cz_playstore_img, .blu_bg .sk_playstore_img, .blu_bg .me_playstore_img,.blu_bg .mk_playstore_img{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.blu_bg .col-md-3{
+    margin-top: 45px;
+}
+
+.blu_bg .playstore .pl_appstore_img{
+    padding-top: 12px;
+    padding-bottom: 8px;
+}
+
+.blu_bg .pl_oneapp{
+    margin-left: 20px;
+    margin-top: 11px;
+}
+
+.blu_bg .hr_oneapp,.blu_bg .cz_oneapp,.blu_bg .sk_oneapp,.blu_bg .me_oneapp,.blu_bg .mk_oneapp{
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+.blu_bg .qrCode_section{
+    background-color: #000000;
+    padding: 6px 6px 22px 6px;
+    position: absolute;
+}
+
+.blu_bg .qrCode_section .qrCode{
+    border-width: thin;
+    border-color: #FFFFFF;
+    border-style: solid;
+}
+
+.blu_bg .app_name{
+    position: absolute;
+    padding-left: 5px;
+    padding-top: 71px;
+    font-size: 9px;
+    color: #FFFFFF;
+}
+
+.blu_bg .me_oneapp {
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.soft_footer{
+    margin-bottom: 95px;
+    margin-top: 40px;
+}
+
+.soft_footer label{
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-left: 6px;
+}
+
+span.grn, span.red, span.org, span.red_me, span.gry{
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+span.red{
+    background-color: #FF2C1E;
+}
+
+span.red_me{
+    background-color: #EB2C3B;
+}
+
+span.grn{
+    background-color: #71ce06;
+}
+
+span.org{
+    background-color: #000000;
+}
+
+span.gry{
+    background-color: #D0D0D0;
+}
+
+.modal-lg {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px 0 rgba(43,60,73,0.15);
+}
+
+.modal-body h4 {
+    margin-left: 32px;
+    height: 30px;
+    color: #262626;
+    font-family: TeleNeo, sans-serif;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 30px;
+    margin-top: 55px;
+}
+
+.formLabel {
+    height: 20px;
+    color: #6C6C6C;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    padding-left: 8px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin-left: 40px;
+}
+
+.formData {
+    height: 20px;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    padding-left: 22px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.formContent hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid #262626;
+    width: 796px;
+    opacity: 0.1;
+    left: 35px;
+    position: absolute;
+}
+
+.pageTitle {
+    margin-left: 46px;
+    margin-top: 40px;
+    height: 38px;
+    width: 400px;
+    color: #262626;
+    letter-spacing: -0.5px;
+    line-height: 38px;
+    font-family: TeleNeoExtraBold, sans-serif;
+}
+
+.license_page_title{
+    margin-left: 35px;
+    margin-top: 40px;
+    height: 38px;
+    width: 400px;
+    color: #262626;
+    letter-spacing: -0.5px;
+    line-height: 38px;
+    font-family: TeleNeoExtraBold, sans-serif;
+}
+
+.modal-footer {
+    border-top: 0;
+    padding-top: 8px;
+    padding-bottom: 35px;
+}
+
+.modal-backdrop {
+    opacity: 0.85 !important;
+}
+
+a.refreshStatusLink, a.diagnosticsRefreshStatusLink {
+    color: #333;
+    text-decoration: none;
+}
+
+.formContent h4 {
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 24px;
+    color: #262626;
+    letter-spacing: 0;
+    line-height: 30px;
+}
+
+.chat_qr{
+    display: flex;
+    padding-top: 2px;
+}
+
+.chat_qr h6{
+    margin-top: 0px;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.chat_qr .contact_sec{
+    margin-top: 30px;
+    margin-left: 25px;
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 64%;
+        height: auto;
+        top: 12%;
+        padding-bottom: 20px;
+        max-width: 860px;
+    }
+
+    .diagnostics_error_content {
+        max-width: 798px;
+    }
+
+    .diagnostics_error_container{
+        padding-left: 34px;
+    }
+}
+
+a.refreshStatusLink, a.diagnosticsRefreshStatusLink {
+    color: #333;
+    text-decoration: none;
+}
+
+.refreshIcon {
+    -webkit-animation:spin 500ms linear infinite;
+    -moz-animation:spin 500ms linear infinite;
+    animation:spin 500ms linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+@media (min-width: 992px) {
+    .modal-sm {
+        width: 46%;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px 0 rgba(43,60,73,0.15);
+		top: 168px;
+		max-width: 616px;
+    }
+	
+    #diagnosticsModal .form-group {
+        margin-bottom: 0px;
+    }
+
+    #diagnosticsModal .formData {
+        height: auto;
+    }
+
+    #diagnosticsModal .modal-footer {
+        margin-left: 20px;
+    }
+
+    #diagnosticsModal .modal-footer button{
+        padding: 7px 23px 7px 23px;
+    }
+
+    .contactSection .gr_bg h6 {
+        width: 360px;
+    }
+
+    /* Greece Nacto CSS Start*/
+    .greece #diagnosticsModal .modal-footer button{
+        padding: 11px 23px 11px 23px;
+    }
+
+    .greece #diagnosticsModal .modal-footer button img{
+        margin-top: -3px;
+    }
+
+    /* Greece Nacto CSS End*/
+}
+
+.contactSection{
+    width: 850px;
+    margin: auto;
+    display: flex;
+    position: absolute;
+	margin-left:180px;
+    top: 690px;
+    padding-bottom: 20px;
+}
+
+.pad_o{
+    padding: 0px;
+}
+
+.mainPgBtn {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 18px;
+    position: absolute;
+    left: 456px;
+    height: 42px;
+    width: 244px;
+    border: 1px solid #979797;
+    border-radius: 4px;
+}
+
+.notFoundMsg {
+    color: #262626;
+	margin-bottom: 30px;
+}
+
+.notFoundImage {
+    height: 270px;
+    width: 510px;
+    position: absolute;
+	left: 338px;
+	top:80px;
+}
+
+.mob_hide{
+    display:inherit;
+}
+
+.mob_show{
+    display:none;
+}
+
+.diagnostics_mob_show{
+    display: none;
+}
+
+.open_source_label, .open_source_label img, .open_source_label label{
+    cursor: pointer;
+}
+
+.licenses_list > label:first-child{
+    font-family: TeleNeoRegular, sans-serif;
+    color: #6C6C6C;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    font-weight: normal;
+	margin-left: 5px;
+}
+
+.license_head{
+    font-family: TeleNeoExtraBold, sans-serif;
+    color: #262626;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-left: 27px;
+}
+
+.licenses_list .license_name{
+    font-family: TeleNeoRegular, sans-serif;
+    color: #007FAF;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    font-weight: normal;
+	margin-left: 31px;
+}
+
+body.modal-open {
+	overflow: visible;
+}
+
+.upgradewithImageMsg{
+    float: none;
+	width: 284px;
+	margin-left: 55px;
+	margin-right: 15px;
+}
+
+.upgradeContent {
+	margin-top: 55px;
+	margin-bottom: 0;
+	height: 110px;
+}
+
+.restartImg {
+	width: 264px;
+}
+
+.restartImg_CZ,.restartImg_Pl{
+    width: 264px;
+    height: 270px;
+}
+
+.restartImg_HR {
+    width: 264px;
+    height: 270px;
+}
+
+.restartImg_Me,.restartImg_MK {
+    width: 270px;
+    height: 270px;
+}
+
+.restartUpgradeImg_CZ,.restartUpgradeImg_Pl{
+    width: 270px;
+    height: 280px;
+    margin-top: 30px;
+}
+
+.restartUpgradeImg_HR{
+    width: 264px;
+    height: 270px;
+    margin-top: 30px;
+}
+
+.restartUpgradeImg_ME{
+    width: 270px;
+    margin-top: 30px;
+}
+
+.restartUpgradeImg_MK{
+    width: 264px;
+    height: 270px;
+    margin-top: 30px;
+}
+
+.resetUpgradeImg_CZ,.resetUpgradeImg_Pl{
+    width: 270px;
+    height: 290px;
+    margin-top: 36px;
+}
+
+.resetUpgradeImg_HR{
+    width: 264px;
+    height: 290px;
+    margin-top: 36px;
+}
+
+.resetUpgradeImg_ME,.resetUpgradeImg_MK{
+    width: 270px;
+    height: 290px;
+    margin-top: 36px;
+}
+
+.resetImg {
+	width: 264px;
+	top: 20px;
+}
+
+.resetImg_CZ,.resetImg_PL{
+    width: 264px;
+    height: 270px;
+}
+
+.resetImg_HR,.resetImg_ME{
+    width: 264px;
+    height: 270px;
+}
+
+.resetImg_MK{
+    width: 270px;
+    height: 270px;
+}
+
+.routerRestartImgtext{
+    position: absolute;
+    color: #000000;
+    top: 61%;
+    width: min-content;
+    font-size: 14px;
+    left: 55%;
+}
+
+.routerRestartImgtextMe{
+    position: absolute;
+    color: #000000;
+    top: 263px;
+    width: min-content;
+    font-size: 14px;
+    left: 57%;
+}
+
+.routerRestartImgtextMK{
+    position: absolute;
+    color: #000000;
+    top: 69%;
+    width: min-content;
+    font-size: 14px;
+    left: 52%;
+}
+
+.routerRestartImgtextMKPopup{
+    position: absolute;
+    color: #000000;
+    top: 60%;
+    width: min-content;
+    font-size: 14px;
+    left: 57%;
+}
+
+.routerRestartImgtextMePopup, .routerRestartImgtextHrPopup{
+    position: absolute;
+    color: #000000;
+    top: 69%;
+    width: min-content;
+    font-size: 14px;
+    left: 52%;
+}
+
+.routerRestartImgtextGrPopup{
+    position: absolute;
+    color: #000000;
+    top: 69%;
+    width: min-content;
+    font-size: 14px;
+    left: 51%;
+}
+
+.routerResetImgtextMe,.routerResetImgtextMK, .routerResetImgtextHrUpgPopUp{
+    position: absolute;
+    color: #000000;
+    top: 73%;
+    font-size: 14px;
+    left: 48%;
+}
+
+html[lang="sq"] .routerResetImgtextMK {
+    margin-left: 8px;
+}
+
+html[lang="en"] .routerResetImgtextMK {
+    margin-left: 24px;
+}
+
+html[lang="mk"] .routerResetImgtextMK {
+    margin-left: 8px;
+}
+
+.routerResetImgtextGR{
+    position: absolute;
+    color: #000000;
+    top: 73%;
+    font-size: 14px;
+    left: 53%;
+}
+
+.routerResetImgtextMeUpgPopUp,.routerResetImgtextMKUpgPopUp{
+    position: absolute;
+    color: #000000;
+    top: 71%;
+    font-size: 14px;
+    left: 54%;
+}
+
+.routerResetImgtext{
+    position: absolute;
+    color: #000000;
+    top: 63%;
+    font-size: 14px;
+    left: 56%;
+}
+
+.routerUpgradeRestartImgtext{
+    position: absolute;
+    color: #000000;
+    top: 61%;
+    width: min-content;
+    font-size: 14px;
+    left: 61%;
+}
+
+.routerUpgradeResetImgtext{
+    position: absolute;
+    color: #000000;
+    top: 63%;
+    font-size: 14px;
+    left: 61%;
+}
+
+.header_css .right_header{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.right_header .dropdown{
+	margin-right:25px;
+}
+
+.contactSection > div {
+    padding-left:0px;
+}
+
+.main_content_class{
+    position: relative;
+}
+
+.right_section .dig_btn img{
+    padding: 4px 10px 4px 12px;
+}
+
+.right_section .dig_btn span{
+    padding-right: 10px;
+}
+
+.right_section .status-list {
+    padding: 0px;
+    margin: 0px;
+}
+
+.right_section .status-item {
+    border-bottom: 1px solid #ccc;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+}
+
+.right_section .status-item:last-child {
+    border-bottom: none;
+}
+
+.right_section .status-item.router_disconnect_li {
+    background: rgba(250, 235, 215, 0.35); /* light tan highlight */
+}
+
+.right_section .disconnect_text {
+    margin-top: 7px;
+    margin-left: 36px;
+}
+
+.right_section h6,
+.small-text {
+    font-family: TeleNeoRegular, sans-serif;
+    color: #6C6C6C;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin: 0px;
+}
+
+.content_restart_btn {
+    margin-top: 20px;
+    color: #262626;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin-left: 36px;
+    border-color: #000000;
+}
+
+.content_restart_btn img {
+    padding-left: 10px;
+}
+
+.content_restart_btn span {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ✅ NEWLY ADDED: Margin for first span inside status item */
+.cont_wdth .right_section .status-item span:nth-child(1) {
+    margin-left: 15px;
+}
+
+.refreshStatusLink span,.diagnosticsRefreshStatusLink span{
+    padding-left: 8px;
+}
+
+.dropdown img{
+    padding-left: 6px;
+}
+
+.head_restart_router button{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.head_restart_router img{
+    padding-right: 10px;
+}
+
+#diagnosticsModal .modal-footer span{
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    color: #262626;
+}
+
+#diagnosticsModal .modal-footer button{
+    border-color: #979797;
+}
+
+#diagnosticsModal .form-group .col-sm-4.formLabel{
+    font-weight: normal;
+}
+
+#diagnostics-content{
+    clear:both;
+    min-height: 50px;
+}
+
+#diagnosticsModal .diagnostics_desc{
+    font-family: TeleNeoRegular, sans-serif;
+    color: #6C6C6C;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    font-weight: normal;
+    padding: 20px 0px 0px 30px;
+    margin-left: 18px;
+}
+
+.h2_margin{
+    margin-left: 32px;
+}
+
+#diagnosticsModal .formContent h4{
+    height: auto;
+    margin-top: 40px;
+}
+
+#diagnosticsModal .modal-body{
+    padding-top: 30px;
+}
+
+.cont_wdth .right_section h5 span:nth-child(2) {
+    font-family: TeleNeoExtraBold, sans-serif;
+    font-size: 16px;
+}
+
+.cont_wdth .right_section h5 span:nth-child(1) {
+    padding-right: 8px;
+}
+
+.right_section .ipv6_address{
+    padding: 0px;
+    overflow-wrap: break-word;
+}
+
+#diagnostics-content .refreshIcon{
+    margin-left: 43%;
+}
+
+.loading_icon{
+    display: flex;
+    justify-content: center;
+    margin-top: 25%;
+}
+
+.diagnostics_error_container{
+    display: flex;
+    flex-direction: row;
+}
+
+.diagnostics_error_content {
+    background: rgba(250,235,215,0.35);
+    width: 98%;
+    padding: 14px 16px 13px 16px;
+}
+
+.diagnostics_error_msg{
+    margin: 0 0 0px;
+    font-family: TeleNeoRegular, sans-serif;
+    font-size: 16px;
+    color: #6C6C6C;
+}
+
+.diagnostics_error_title{
+    color: #262626;
+    font-size: 16px;
+    font-family: TeleNeoBold, sans-serif;
+    padding-left: 5px;
+}
+
+.alertIcon {
+    height: 18px;
+    width: 18px;
+    margin-right: 12px;
+}
+
+.diagnosticsRefreshStatusLink{
+    padding-right: 40px;
+    color: #262626 !important;
+    font-family: TeleNeoBold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18px;
+}
+
+.diagnosticsPageSectionHeading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+/* Greece Nacto CSS Start*/
+.gr_refresh_button {
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 12px 24px;
+    border: 1px solid #9D9D9D;
+}
+
+.gr_dig_btn{
+    background-color: #509E2F;
+    color: #F4F4F4;
+    padding: 8px 13px;
+}
+
+.greece_contact .gr_bg h2, .greece_contact .gr_bg a{
+    color: #509E2F;
+    font-family: BTCosmo, sans-serif;
+    font-size: 32px;
+}
+
+.greece_contact .gr_bg h2 img {
+    margin-right:5px;
+}
+
+.greece .dropdown-menu{
+    background-color:#E6E6E6;
+    min-width: 72px;
+    border: 1px solid #262626;
+}
+
+.greece .dropdown-menu>li>a {
+    font-family: PeridotPESemiBold, sans-serif;
+    color: #262626;
+    font-size: 14px;
+}
+
+.greece .big_txt {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.greece .dropdown-menu>li>a:focus, .greece .dropdown-menu>li>a:hover{
+    background-color: #D8D8D8;
+}
+
+.greece .gr_dig_btn:focus, .greece .gr_dig_btn:hover{
+    background-color: #509E2F;
+    color: #F4F4F4;
+}
+
+.greece .head_restart_router img{
+    margin-top: -4px;
+}
+
+.greece_contact .blu_bg{
+    background-color: #31A735;
+    border-radius: 0px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding: 5px 7px 0px 25px;
+}
+
+.greece_contact .gr_bg{
+    border-radius: 0px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.greece_contact .blu_bg .col-md-3 {
+    margin-top: 37px;
+}
+
+.gr_right_header button {
+    border: 1px solid #262626;
+    color: #262626;
+}
+
+.greece #diagnosticsModal .diagnostics_desc {
+    padding: 10px 0px 0px 32px;
+}
+
+.greece .mainPgBtn {
+    background-color: transparent;
+    font-size: 14px;
+    font-family: PeridotPESemiBold, sans-serif;
+}
+
+.greece_router_disconnected .content_restart_btn{
+    padding: 11px 14px;
+    background-color: transparent;
+}
+
+.me_router_disconnected .content_restart_btn{
+    padding: 11px 14px;
+}
+
+.greece div .big_txt, .greece .right_section h4, .greece .gr_bg h4, .greece .pageTitle, .greece .formContent h4  {
+    font-family: BTCosmo, sans-serif;
+}
+
+.greece .text_rd{
+    font-family: PeridotPERegular, sans-serif;
+    font-size: 14px;
+    color: #262626;
+    font-weight: 700;
+}
+
+.greece .gr_right_header button{
+    font-family: PeridotPESemiBold, sans-serif;
+}
+
+.greece .right_section ul li, .greece .gr_dig_btn ,.greece .content_restart_btn, .greece .refreshStatusLink span,.greece .diagnosticsRefreshStatusLink span, .greece .cont_wdth .right_section h5 span:nth-child(2), .greece .soft_footer label, .greece .license_head, .greece .formData, .greece  #diagnosticsModal .modal-footer span {
+    font-family: PeridotPESemiBold, sans-serif;
+    font-size: 14px;
+}
+
+.greece .right_section h6, .greece .small-text, .greece .gr_bg h6, .greece .blu_bg h6, .greece .licenses_list > label:first-child, .greece .licenses_list .license_name, .greece #diagnosticsModal .diagnostics_desc, .greece .formLabel {
+    font-family: PeridotPERegular, sans-serif;
+    font-size: 14px;
+}
+
+.greece .blu_bg h3{
+    font-family:BTCosmo, sans-serif;
+    font-size: 21px;
+}
+
+.greece .diagnostics_error_title{
+    font-family: PeridotPESemiBold, sans-serif;
+    font-size: 14px;
+}
+
+.greece .diagnostics_error_msg{
+    font-family: PeridotPERegular, sans-serif;
+    font-size: 14px;
+}
+
+.greece .modal-footer .resetBtn{
+    white-space: normal;
+}
+
+.greece_telephone > div:nth-child(1){
+    margin-left: 17px;
+}
+
+.greece_telephone > div:nth-child(2){
+    margin-left: 25px;
+}
+
+.greece_telephone > div:nth-child(3){
+    margin-left: 32px;
+}
+
+.greece_telephone h6{
+    font-family: PeridotPERegular, sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #6C6C6C;
+}
+
+.greece_tel_uptime{
+    color: #262626 !important;
+}
+
+.greece_tel_status span.gry, .greece_tel_status span.grn{
+    margin-right: 20px;
+}
+
+.greece_call_btn_mob{
+    align-items: center;
+    text-decoration: none;
+    padding: 0px 12px 0px 10px;
+    background-color: transparent;
+    border: 1px solid #9D9D9D;
+    margin-top: 36px;
+    border-radius: 4px;
+}
+
+.gr_bg > a:focus, .gr_bg > a:hover{
+    text-decoration: none;
+}
+
+.gr_bg .greece_call_btn_mob span {
+    color: #509E2F;
+    font-family: BTCosmo, sans-serif;
+    font-size: 36px;
+    line-height: 40px;
+    margin-left: 8px;
+}
+
+.greece_tel_status .formLabel{
+    height: auto;
+}
+/* Greece Nacto CSS End*/
+
+@media only screen and (max-width: 768px) {
+    body:before {
+        height: 360px;
+    }
+    .modal-lg {
+        height: auto;
+        width: 100%;
+        position: absolute;
+        margin-left: 0;
+    }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
+
+    .formData {
+        float: right;
+        bottom: 30px;
+        padding-bottom: 20px;
+        position: static;
+        display: table;
+    }
+
+    .restartBtn {
+        height: 42px;
+        width: 100%;
+        left: 3px;
+    }
+
+    .formContent hr {
+        left: 16px;
+        width: 93%;
+    }
+
+    .resetBtn {
+        width: 98%;
+    }
+
+    .license_page_title {
+        margin-left: 20px;
+    }
+
+    .pageTitle,.formLabel {
+        margin-left: 16px;
+    }
+
+    .modal-body h4 {
+        margin-left: 6px;
+    }
+    .logo{
+        float: left;
+        margin-bottom: 20px;
+    }
+    .header_css .col-sm-3{
+        float: right;
+    }
+    .header_css .col-sm-4{
+        float: left!important;
+        padding-left: 0px!important;
+    }
+    .header_css .col-sm-9{
+        float: left;
+    }
+    .header_css .col-sm-8{
+        float: left!important;
+        padding-right: 0px!important;
+        padding-left: 0px!important;
+    }
+    .dropdown{
+        margin-bottom:10px;
+    }
+    .header_css{
+        padding-bottom:5px;
+    }
+    .big_txt{
+        font-size: 36px;
+        line-height: 40px;
+        display: flex;
+        justify-content: center;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 15px;
+        margin-top: 30px;
+        font-weight: 600;
+    }
+    .cont_wdth{
+        height: auto;
+        width: 100%;
+        display: inline-block;
+        border-radius: 0;
+        padding: 15px 0px;
+        display: inline-block;
+        background-color: transparent;
+    }
+    .left_section .col-sm-6{
+        width: 100%;
+    }
+    .left_section{
+        padding-top: 0px;
+		padding-left: 0px;
+    }
+    .gv_wdth{
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 0px;
+        margin-top: 20px;
+    }
+    .gv_wdth>div{
+        padding-left: 15px;
+        width: 100%!important;
+        padding-right: 15px;
+        float: none !important;
+        margin-bottom: 20px;
+    }
+    .blu_bg{
+        height: auto!important;
+        display: inline-block;
+        width: 100%;
+    }   
+    .blu_bg .pl_oneapp{
+        margin-left: 13px;
+        margin-top: 11px;
+    }     
+    .blu_bg .hr_oneapp,.blu_bg .me_oneapp,.blu_bg .mk_oneapp{
+        margin-left: 13px;
+        margin-top: 11px;
+    }
+    .blu_bg .sk_oneapp {
+        margin-left: 13px;
+        margin-top: 0px;
+    }
+    .gv_wdth>div:last-child{
+        padding-right: 15px;
+    }
+    .right_section h4{
+        padding: 0px 20px;
+    }
+    .right_section h5 .ip_value{
+        font-size:18px;
+    }
+    .right_section h6, .small-text{
+        padding: 0px 20px;
+    }
+    .right_section h2 {
+        white-space: nowrap;
+        overflow-x: auto;
+        margin-left: 5%;
+    }
+    .right_section ul li{
+        border-top: 1px solid #ccc;
+        border-bottom: 0px;
+        padding-bottom: 12px;
+        font-family: TeleNeoBold, sans-serif;
+        padding-top: 12px;
+        font-size: 16px;
+        padding-left: 20px;
+    }
+    .gr_bg h4{
+        font-weight: 600;
+        line-height: 20px;
+    }
+    .blu_bg h3{
+        font-size:24px;
+        height: auto;
+    }
+    .left_section >img{
+        margin-bottom: 30px;
+    }
+    .right_section{
+        background-color: #fff;
+        border-radius: 5px;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 20px 0px;
+    }
+    .gr_bg{
+        height:auto;
+    }
+    .mob_hide{
+        display:none;
+    }
+    .mob_show{
+        display:inline-flex;		
+    }
+    .diagnostics_mob_show{
+        display: block;
+    }
+    .mob_txt{
+        width: 68%;
+    }
+
+    .contactSection{
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 20px;
+        margin-top: 515px;
+        margin-left:0px;
+        left: 0;
+        top:0;
+    }
+
+    .contactSection>div{
+        width: 100%!important;
+        float: none !important;
+        margin-bottom: 20px;
+    }
+
+    .mainPgBtn {
+        position: absolute;
+        left: 66px;
+        top:20px;
+    }
+
+    .notFoundImage {
+        width: 95%;
+        height: 175px;
+        margin: auto;
+        position: absolute;
+        left: 10px;
+        top: 100px;
+    }
+
+    .license_head, .licenses_list .license_name{
+        display:inline;
+    }
+    .licenses_list label.license_name, label.license_head{
+        float:left;
+    }
+    .licenses_list div.license_name, div.license_head{
+        float:right;
+    }	
+
+	.modal-dialog.modal-sm {
+		margin: auto;
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+		bottom: 0;
+	}
+
+	.restartImg {
+		width: 47%;
+		float: none;
+		left: 10px;
+	}
+
+    .restartImg_CZ,.restartImg_Pl,.restartImg_Me,.restartImg_MK {
+		width: 80%;
+		position: absolute;
+		float: none;
+		height: 260px;
+		top: 220px;
+		left: 32px;
+	}
+
+    .restartImg_HR {
+        width: 82%;
+        position: absolute;
+        float: none;
+        height: 280px;
+        top: 212px;
+        left: 32px;
+	}
+
+	.resetImg {
+		width: 49%;
+		float: none;
+		left: 10px;
+	}
+
+    .resetImg_CZ,.resetImg_PL{
+        width: 80%;
+        position: absolute;
+        float: none;
+        height: 260px;
+        top: 185px;
+        left: 30px;
+    }
+
+    .resetImg_HR{
+        width: 81%;
+        position: absolute;
+        float: none;
+        height: 280px;
+        top: 185px;
+        left: 30px;
+    }
+
+    .resetImg_ME{
+        width: 81%;
+        position: absolute;
+        float: none;
+        height: 280px;
+        top: 188px;
+        left: 20px;
+    }
+
+    .resetImg_MK{
+        width: 81%;
+        position: absolute;
+        float: none;
+        height: 280px;
+        top: 249px;
+        left: 20px;
+    }
+
+    .restartUpgradeImg_CZ,.restartUpgradeImg_Pl{
+        position: absolute;
+        width: 70%;
+        float: none;
+        top: 41%;
+        left: 18%;
+    }
+
+    .restartUpgradeImg_HR{
+        position: absolute;
+        width: 81%;
+        float: none;
+        top: 240px;
+        left: 42px;
+    }
+
+    .resetUpgradeImg_CZ,.resetUpgradeImg_Pl{
+        position: absolute;
+        float: none;
+        width: 80%;
+        top: 221px;
+        left: 42px;
+    }
+
+   .resetUpgradeImg_HR{
+        position: absolute;
+        float: none;
+        width: 81%;
+        height: 300px;
+        top: 221px;
+        left: 42px;
+    }
+
+    
+    .resetUpgradeImg_ME{
+        position: absolute;
+        float: none;
+        width: 81%;
+        height: 300px;
+        top: 221px;
+        left: 22px;
+    }
+
+    .resetUpgradeImg_MK{
+        position: absolute;
+        float: none;
+        width: 81%;
+        height: 300px;
+        top: 252px;
+        left: 22px;
+    }
+
+    .restartUpgradeImg_ME{
+        position: absolute;
+        width: 81%;
+        float: none;
+        top: 240px;
+        left: 21px;
+    }
+
+    .restartUpgradeImg_MK{
+        position: absolute;
+        width: 81%;
+        float: none;
+        top: 346px;
+        left: 21px;
+    }
+    
+    .routerRestartImgtext{
+        position: absolute;
+        color: #000000;
+        top: 74%;
+        width: min-content;
+        font-size: 14px;
+        left: 24%;
+    }
+
+    .routerRestartImgtextMe{
+        position: absolute;
+        color: #000000;
+        top: 478px;
+        width: min-content;
+        font-size: 14px;
+        left: 12%;
+    }
+
+    .routerRestartImgtextMePopup, .routerRestartImgtextHrPopup{
+        position: absolute;
+        color: #000000;
+        top: 80%;
+        width: min-content;
+        font-size: 14px;
+        left: 15%;
+    }
+
+    html[lang="hr"] .routerRestartImgtextHrPopup {
+        top: 82%;
+    }
+
+    .routerRestartImgtextMK{
+        position: absolute;
+        color: #000000;
+        top: 408px;
+        width: min-content;
+        font-size: 14px;
+        left: 15%;
+    }
+
+    .routerRestartImgtextMKPopup{
+        position: absolute;
+        color: #000000;
+        top: 570px;
+        width: min-content;
+        font-size: 14px;
+        left: 15%;
+    }
+
+    html[lang="en"] .routerRestartImgtextGrPopup, html[lang="el"] .routerRestartImgtextGrPopup {
+        top: 80%;
+        left: 14%;
+    }
+
+    .routerResetImgtextMe, .routerResetImgtextHrUpgPopUp{
+        position: absolute;
+        color: #000000;
+        top: 88%;
+        font-size: 14px;
+        left: 8%;
+    }
+
+    html[lang="hr"] .routerResetImgtextHrUpgPopUp {
+        left: 17%;
+    }
+
+    .routerResetImgtextMK{
+        position: absolute;
+        color: #000000;
+        top: 93%;
+        font-size: 14px;
+        left: 8%;
+    }
+
+    .h2_margin {
+        margin-left: 7px;
+    }
+    
+    .routerResetImgtextMeUpgPopUp{
+        position: absolute;
+        color: #000000;
+        top: 82%;
+        font-size: 14px;
+        left: 9%;
+    }
+
+    .routerResetImgtextMKUpgPopUp{
+        position: absolute;
+        color: #000000;
+        top: 86%;
+        font-size: 14px;
+        left: 9%;
+    }
+
+    .routerResetImgtext {
+        position: absolute;
+        color: #000000;
+        top: 77%;
+        font-size: 14px;
+        left: 23%;
+    }
+
+    html[lang="pl"] .routerResetImgtext {
+        left: 23%;
+    }
+
+    html[lang="cz"] .routerResetImgtext {
+        left: 20%;
+    }
+
+    html[lang="en"] .routerResetImgtextGR, html[lang="el"] .routerResetImgtextGR {
+        top: 88%;
+        left: 15%;
+    }
+
+    .routerUpgradeResetImgtext{
+        position: absolute;
+        color: #000000;
+        top: 75%;
+        font-size: 14px;
+        left: 24%;
+    }
+
+    .routerUpgradeRestartImgtext{
+        position: absolute;
+        color: #000000;
+        top: 76%;
+        font-size: 14px;
+        left: 28%;
+    }
+
+	.right_header .dropdown{
+		margin-right:10px;
+	}
+
+	.licenses_list > label:first-child{
+		padding: 0;
+		margin-left: 6px;
+	}
+	
+    .restartModalContent{
+        margin-top: 100px;
+    }
+
+	.resetModalContent {
+		margin-top: 100px;
+	}
+
+	.licenses_list .license_name {
+		margin-left: 20px;
+	}
+
+	.content .header_css div:nth-child(1) {
+		float: left!important;
+	}
+
+	.content .header_css div:nth-child(2) {
+		justify-content: flex-end;
+	}
+
+	.notFoundMsg {
+		margin-top: 30px;
+	}
+
+    #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 0px;
+    }
+
+    html[lang="mk"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 20px; 
+    }
+
+    html[lang="sq"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 24px;
+    }
+
+    html[lang="cz"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 24px;
+    }
+
+    html[lang="el"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 24px;
+    }
+
+    html[lang="hr"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 24px;
+    }
+
+    html[lang="me"] #diagnosticsModal .diagnostics_desc {
+        padding-left: 5px;
+        margin-top: 24px;
+    }
+
+    html[lang="en"] .firstheading {
+        margin-top: -25px;
+    }
+
+    html[lang="pl"] .firstheading {
+        margin-top: -55px;
+    }
+
+    html[lang="mk"] .firstheading {
+        margin-top: -55px;
+    }
+
+    html[lang="sq"] .firstheading {
+        margin-top: -45px;
+    }
+
+    html[lang="cz"] .firstheading {
+        margin-top: -35px;
+    }
+
+    html[lang="el"] .firstheading {
+        margin-top: -35px;
+    }
+
+    html[lang="hr"] .firstheading {
+        margin-top: -35px;
+    }
+
+    html[lang="me"] .firstheading {
+        margin-top: -35px;
+    }
+
+    html[lang="mk"] .routerResetImgtextMK {
+        margin-left: -4px;
+    }
+	
+	.dig_btn, .content_restart_btn {
+		width: 87%;
+		margin-left: 23px;
+	}
+	
+	.content_restart_btn {
+		width: 94%;
+		margin-left: 3%;
+	}
+	
+	.right_section .disconnect_text {
+		margin-left: 0px;
+	}
+	
+	.blu_bg .playstore{
+		padding-left: 15px;
+		padding-top: 30px;
+		padding-right: 23px;
+	}
+	
+	.blu_bg .playstore .img2{
+        padding-bottom: 5px;
+        padding-top: 17px;
+	}
+	
+    .blu_bg h6{
+        top: 20px;
+    }
+   
+    .right_section .ipv6_address{
+        font-size: 16px !important;
+        padding: 0px;
+        overflow-wrap: break-word;
+        margin-left: 20px;
+        line-height: 20px;
+        padding-top: 8px;
+        display: flex
+    }
+
+    .right_section h5:first-of-type {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 35px;
+    }
+
+    .contactSection .col-sm-6 {
+        margin-bottom:20px;
+    }
+
+    .pad_o {
+        padding: 15px;
+    }
+
+    .chat_qr .contact_sec{
+        margin-top: 0px;
+        margin-left: 12px;
+    }
+
+    .ref_txt{
+        padding-bottom: 50px;
+    }
+
+    .chat_qr {
+        padding-top: 15px;
+    }
+
+    .soft_footer{
+        margin-bottom: 22px;
+        margin-top: 0px;
+    }   
+    
+    .diagnostics_error_content {
+        width: 93%;
+        margin-left: 15px;
+    }
+
+    .diagnosticsRefreshStatusLink {
+        padding-right: 20px;
+        white-space: nowrap;
+    }
+
+    .alertIcon {
+        margin-top: 12px;
+    }
+
+    .img3{
+        margin-bottom: -4px;
+    }
+
+    #diagnostics-content {
+        padding-top: 7%;
+    }
+    /* Greece Nacto CSS Start*/
+
+    .greece .mob_txt{
+        width: 55%;
+        line-height: 40px;
+    }
+
+    .greece .right_section ul li {
+        border-top: 1px solid #ccc;
+        border-bottom: 0px;
+    }
+
+    .greece_contact .gr_bg, .greece_contact .blu_bg {
+        border-top-left-radius: 0px;
+    }
+
+    .greece .gr_refresh_button {
+        margin-bottom: 30px;
+    }
+
+    .greece .gr_bg h4 {
+        font-size: 24px;
+    }
+
+    .greece .notFoundImage {
+        width: 80%;
+        left: 38px;
+    }
+
+    .greece .contactSection .gv_wdth>div {
+        padding-left: 0px;
+        padding-right:0px;
+    }
+
+    .greece .contactSection>div {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .greece .blu_bg h3 {
+        font-size: 24px;
+    }
+     
+    .greece .right_section h4 {
+        font-size: 32px;
+    }
+
+    .greece #diagnosticsModal .diagnostics_desc {
+        padding: 40px 0px 0px 0px;
+    }
+
+    .mob_greece_telephone h6{
+        font-family: PeridotPERegular, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        color: #6C6C6C;
+    }
+
+    .mob_greece_telephone{
+        width: 90vw;
+    }
+
+    .mob_greece_telephone span.gry, .mob_greece_telephone span.grn{
+        margin-right: 20px;
+    }
+
+    /* Greece Nacto CSS End*/
+}

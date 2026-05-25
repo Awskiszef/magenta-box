@@ -1,0 +1,26 @@
+<div class="modal fade" id="restartModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm applyPosition" role="document">
+        <div class="modal-content restartModalContent">
+            <div class="modal-header">
+                <button type="button" class="close modalCloseBtn focusable" data-dismiss="modal">
+                    <img src="images/closeIcon.png" data-alt="ALT_CLOSE" />
+                </button>
+                <h4 class="modal-title" data-label="RESTART"></h4>
+            </div>
+            <div class="modal-body restartPopupBtn">
+                <p data-label="INTERNET_DISCONN_DESCRIPTION"></p>
+                <button type="button" class="btn btn-default focusable" onclick="showRestartText()">
+                    <span data-label="RESTART"></span>
+                </button>
+            </div>
+            <div id="restartPopUpImageContent" class="hideInstRestartBtn" style="display:none;">
+                <img class="restart_image_switch_pl restart_image_switch_cz restart_image_switch_sk
+                            restart_image_switch_hr restart_image_switch_mk restart_image_switch_me
+                            restart_image_switch_gr"
+                     src="images/restartImg_PL.png" alt="restart instruction"/>
+                <button type="button" class="btn btn-default focusable" onclick="hideRestartText()">OK</button>
+            </div>
+            <div id="restartPopUpWithoutImageContent"></div>
+        </div>
+    </div>
+</div>

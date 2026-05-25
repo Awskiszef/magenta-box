@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link rel="icon" type="image/x-icon">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tmpl.js"></script>
+    <script src="js/utility.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/translator.js"></script>
+    <script>
+        cacheLanguageToSession();
+    </script>
+</head>
+<body>
+    <noscript>
+        <div class="noscript-modal">
+            <h4 class="noscript-modal-title">JavaScript Disabled</h4>
+            <div class="noscript-modal-body">
+                <img src="../images/warningImage.png" alt="Warning Image" class="noscript-modal-image">
+                <p class="noscript-modal-msg">
+                    JavaScript is disabled. Please enable it in your browser settings to continue.  
+                    For full functionality of this site, it is necessary to enable JavaScript.  
+                    <br><br>Click the button below for instructions on how to enable JavaScript in your web browser.
+                </p>
+            </div>
+            <div class="noscript-modal-footer">
+                <a href="https://www.enable-javascript.com/" target="_blank" class="noscript-close-btn">
+                    How to Enable JavaScript
+                </a>
+            </div>
+        </div>
+    </noscript>
+    
+    <div class="container">
+        <div id="loadingIcon" class="loading_icon">
+            <img class="refreshIcon" src="images/refreshIcon.png"/>
+        </div>
+        <div id="common_header" style="display: none;" class="row header_css">
+            <div class="col-sm-6">
+                <div class="logo"><img class="mob_hide" src="images/logo.png" data-alt="ALT_TELEKOM_LOGO" /><img class="mob_show" src="images/logo-mob.png"/></div>
+            </div>
+            <div class="col-sm-6 text-right right_header">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle focusable" type="button" id="menu1" data-toggle="dropdown"> <img src="images/down-arrow.png" alt="" aria-hidden="true" /></button>
+                    <ul id="language-select" onclick="LinkChange()" class="dropdown-menu" role="menu" data-alt="ALT_LANGUAGE_SELECTOR">
+                        <li class="language_en_pl" role="presentation" data-value="en_pl" href="languages/en_pl.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_en_hr" role="presentation" data-value="en_hr" href="languages/en_hr.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_en_cz" role="presentation" data-value="en_cz" href="languages/en_cz.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_en_sk" role="presentation" data-value="en_sk" href="languages/en_sk.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_en_me" role="presentation" data-value="en_me" href="languages/en_me.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_en_mk" role="presentation" data-value="en_mk" href="languages/en_mk.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_hu" role="presentation" data-value="hu" href="languages/hu.json"><a class="focusable" role="menuitem">HU</a></li>
+                        <li class="language_pl" role="presentation" data-value="pl" href="languages/pl.json"><a class="focusable" role="menuitem">PL</a></li>
+                        <li class="language_cz" role="presentation" data-value="cz" href="languages/cz.json"><a class="focusable" role="menuitem">CZ</a></li>
+                        <li class="language_hr" role="presentation" data-value="hr" href="languages/hr.json"><a class="focusable" role="menuitem">HR</a></li>
+                        <li class="language_sk" role="presentation" data-value="sk" href="languages/sk.json"><a class="focusable" role="menuitem">SK</a></li>
+                        <li class="language_me" role="presentation" data-value="me" href="languages/me.json"><a class="focusable" role="menuitem">ME</a></li>
+                        <li class="language_mk" role="presentation" data-value="mk" href="languages/mk.json"><a class="focusable" role="menuitem">MK</a></li>
+                        <li class="language_alb" role="presentation" data-value="alb" href="languages/alb.json"><a class="focusable" role="menuitem">ALB</a></li>
+                    </ul>
+                </div>
+                <div class="head_restart_router">
+                    <button type="button" class="btn btn-default focusable"  data-toggle="modal" data-target="#restartModal" data-keyboard="false" data-backdrop="static"><img src="images/restartIcon.png" aria-hidden="true" /><span class="mob_hide" data-label="RESTART"></span><span class="mob_show" data-label="RESTART_TEXT"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="gr_header" style="display: none;" class="row header_css">
+            <div class="col-sm-6">
+                <div class="logo"><img class="mob_hide" src="images/cosmote_logo.png" alt="Logo"/><img class="mob_show" src="images/cosmote_logo-mob.png" aria-hidden="true" /></div>
+            </div>
+            <div class="col-sm-6 text-right right_header gr_right_header">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle focusable" type="button" id="menu2" data-toggle="dropdown"> <img src="images/down-arrow_GR.png" aria-hidden="true" /></button>
+                    <ul id="language-select" onclick="LinkChange()" class="dropdown-menu" role="menu" data-alt="ALT_LANGUAGE_SELECTOR">
+                        <li class="language_en_gr" role="presentation" data-value="en_gr" href="languages/en_gr.json"><a class="focusable" role="menuitem">EN</a></li>
+                        <li class="language_gr" role="presentation" data-value="gr" href="languages/gr.json"><a class="focusable" role="menuitem">GR</a></li>
+                    </ul>
+                </div>
+                <div class="head_restart_router">
+                    <button type="button" class="btn btn-default focusable"  data-toggle="modal" data-target="#restartModal" data-keyboard="false" data-backdrop="static"><img src="images/InfoIcon.png" alt="Info"/><span class="mob_hide" data-label="RESTART"></span><span class="mob_show" data-label="RESTART_TEXT"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="main-content" class="main_content_class">
+
+        </div>
+        <script type="text/x-tmpl" id="main-content-tmpl">
+            <div class="row">
+                <h1 class="text-center big_txt" >
+               {%
+                    if (o.internetStatus == 'Up') { %}
+                        <span class="mob_txt" data-label = "ROUTER_CONN_MSG" />
+                    {% }
+                    else { %}
+                        <span class="mob_txt" data-label = "ROUTER_DISCONN" />
+                    {% }
+                %}
+                </h1>
+            </div>
+            <div class="row">
+                <div class="cont_wdth">
+                    <div class="col-sm-6 left_section">
+                        {%
+                            if (o.internetStatus == 'Up') { %}
+                                {%
+                                    if (partnerIdCheck("hu",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/routerOk.png" alt="router"/>
+                                        <img class="mob_show" src="images/routerOk-M.png" />
+                                        {% }
+                                    else if (partnerIdCheck("pl",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FAST5670-M.png" />
+                                        {% }
+                                    else if(partnerIdCheck("hr",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M.png" />
+                                        {% }
+                                    else if(partnerIdCheck("mk",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M.png" />
+                                        {% }
+                                    else if(partnerIdCheck("gr",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233_GR-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233_GR-M.png" />
+                                        {% }
+                                    else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FAST5670-M.png" />
+                                        {% }
+                                    else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FAST5670-M.png" />
+                                        {% }
+                                    else if(partnerIdCheck("me",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M.png" />
+                                        {% }
+                                    %}
+                                {% }
+                            else { %}
+                                {%
+                                    if (partnerIdCheck("hu",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/routerDisconnect.png" alt="router"/>
+                                        <img class="mob_show" src="images/routerDisconnect-M.png"/>
+                                        {% }
+                                    else if (partnerIdCheck("pl",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D-warning.png" alt="router" />
+                                        <img class="mob_show" src="images/FAST5670-M-warning.png" />
+                                        {% }
+                                    else if(partnerIdCheck("hr",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M-warning.png" />
+                                        {% }
+                                    else if(partnerIdCheck("mk",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M-warning.png" />
+                                        {% }
+                                    else if(partnerIdCheck("gr",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233_GR-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233_GR-M-warning.png" />
+                                        {% }
+                                    else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FAST5670-M-warning.png" />
+                                        {% }
+                                    else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                        <img class="mob_hide" src="images/FAST5670-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FAST5670-M-warning.png" />
+                                        {% }
+                                    else if(partnerIdCheck("me",o.partner_id)) { %}
+                                        <img class="mob_hide" src="images/FGA2233-D-warning.png" alt="router"/>
+                                        <img class="mob_show" src="images/FGA2233-M-warning.png" />
+                                        {% }
+                                    %}
+                            {% }
+                        %}	
+                        <div class="text_rd">
+                            {%
+                                if (partnerIdCheck("pl",o.partner_id)){ %}
+                                    <span data-label = "ROUTER_INFO1_PL"/>
+                                    {% }
+                                else { %}
+                                    <span data-label = "ROUTER_INFO1"/>
+                                    {% }
+                            %}
+                        </div>
+                        <div class="text_rd"><span data-label = "ROUTER_INFO2"/></div>
+                        <div class="ref_txt">
+                            {%
+                                if (partnerIdCheck("gr",o.partner_id)) { %}
+                                    <a class="refreshStatusLink focusable" href="javascript:void(0)" onclick="refreshStatus();"><img src="images/refreshIcon_GR.png" data-alt="ALT_REFRESH_STARTED"/> <span data-label = "REFRESH" ></span></a>
+                                {% }
+                                else { %}
+                                    <a class="refreshStatusLink focusable" href="javascript:void(0)" onclick="refreshStatus();"><img src="images/refreshIcon.png" data-alt="ALT_REFRESH_STARTED" /> <span data-label = "REFRESH" ></span></a>
+                                {% }
+                            %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 right_section">
+                        {%
+                            if (partnerIdCheck("gr",o.partner_id)) { %}
+                                <h6><span data-label = "WIFI_LABEL"/></h6>
+                                <h4 data-aria="true">{%#o.wifi_ssid%}</h4>
+                            {% }
+                            else { %}
+                                <h2 data-aria="true">{%#o.wifi_ssid%}</h2>
+                                <h5 class="small-text"><span data-aria="true" data-label = "WIFI_LABEL"/></h5>
+                            {% }
+                        %}
+                        <h5><span class="small-text" data-label = "IPADD"></span> <span data-aria="true">{%#o.ipAdd%}</span></h5>
+                        <h5><span class="small-text" data-label = "IPV6_ADDRESS"></span> <span class="ipv6_address" data-aria="true">{%#o.ipv6_address%}</span></h5>
+
+                        <div class="right_section">
+                            <div class="status-list">
+                                <div class="status-item">
+                                    {%
+                                        if (o.broadbandStatus == 'Up') { %}
+                                            <span class="grn"></span>
+                                            <span data-label="BROADBAND_CONN_STATUS"></span>
+                                        {% }
+                                        else { %}
+                                            <span class="gry"></span>
+                                            <span data-label="BROADBAND_UNREACHABLE"></span>
+                                        {% }
+                                    %}
+                                </div>
+
+                                {%
+                                    if (o.internetStatus == 'Up') { %}
+                                        <div class="status-item">
+                                            <span class="grn"></span>
+                                            <span data-label="INTERNET_CONN_STATUS"></span>
+                                        </div>
+                                    {% }
+                                    else { %}
+                                        {%
+                                            if (partnerIdCheck("gr", o.partner_id)) { %}
+                                                <div class="status-item router_disconnect_li greece_router_disconnected">
+                                                    <span class="red"></span>
+                                                    <span data-label="INTERNET_DISCONN"></span>
+                                                    <h6 class="disconnect_text" data-label="INTERNET_DISCONN_DESCRIPTION"></h6>
+                                                    <button type="button" class="btn btn-default content_restart_btn focusable"
+                                                        data-toggle="modal" data-target="#restartModal" data-keyboard="false" data-backdrop="static">
+                                                        <img src="images/InfoIcon.png" alt="Info" />
+                                                        <span data-label="RESTART" />
+                                                    </button>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("me", o.partner_id)) { %}
+                                                <div class="status-item router_disconnect_li me_router_disconnected">
+                                                    <span class="red_me"></span>
+                                                    <span data-label="INTERNET_DISCONN"></span>
+                                                    <h6 class="disconnect_text" data-label="INTERNET_DISCONN_DESCRIPTION"></h6>
+                                                    <button type="button" class="btn btn-default content_restart_btn focusable"
+                                                        data-toggle="modal" data-target="#restartModal" data-keyboard="false" data-backdrop="static">
+                                                        <img src="images/restartIcon_ME.png" aria-hidden="true" />
+                                                        <span data-label="RESTART" />
+                                                    </button>
+                                                </div>
+                                            {% }
+                                            else { %}
+                                                <div class="status-item router_disconnect_li">
+                                                    <span class="org"></span>
+                                                    <span data-label="INTERNET_DISCONN"></span>
+                                                    <p class="disconnect_text small-text" data-label="INTERNET_DISCONN_DESCRIPTION"></p>
+                                                    <button type="button" class="btn btn-default content_restart_btn focusable"
+                                                        data-toggle="modal" data-target="#restartModal" data-keyboard="false" data-backdrop="static">
+                                                        <img src="images/default.png" aria-hidden="true" />
+                                                        <span data-label="RESTART" />
+                                                    </button>
+                                                </div>
+                                            {% }
+                                        %}
+                                    {% }
+                                %}
+
+                                {%
+                                    if (partnerIdCheck("pl", o.partner_id) != true &&
+                                        partnerIdCheck("cz", o.partner_id) != true &&
+                                        partnerIdCheck("sk", o.partner_id) != true) { %}
+                                        {%
+                                            if (o.phoneStatus == 'Up') { %}
+                                                <div class="status-item">
+                                                    <span class="grn"></span>
+                                                    <span data-label="TELEPHONE_CONN_STATUS"></span>
+                                                </div>
+                                            {% }
+                                            else { %}
+                                                <div class="status-item">
+                                                    <span class="gry"></span>
+                                                    <span data-label="TELE_DISCON"></span>
+                                                </div>
+                                            {% }
+                                        %}
+                                    {% }
+                                    else { %}
+                                        {%
+                                            if (o.lanStatus) { %}
+                                                <div class="status-item">
+                                                    <span class="grn"></span>
+                                                    <span data-label="LAN_CONN_STATUS"></span>
+                                                </div>
+                                            {% }
+                                            else { %}
+                                                <div class="status-item">
+                                                    <span class="gry"></span>
+                                                    <span data-label="LAN_DISCON"></span>
+                                                </div>
+                                            {% }
+                                        %}
+                                    {% }
+                                %}
+
+                                <div class="status-item">
+                                    {%
+                                        if (o.wifiStatus) { %}
+                                            <span class="grn"></span>
+                                            <span data-label="WIFI_CONN_STATUS"></span>
+                                        {% }
+                                        else { %}
+                                            <span class="gry"></span>
+                                            <span data-label="WIFI_INACTIVE"></span>
+                                        {% }
+                                    %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {%
+                            if (partnerIdCheck("gr",o.partner_id)) { %}
+                            <button type="button" class="btn btn-default dig_btn gr_dig_btn focusable" data-toggle="modal" data-target="#diagnosticsModal" data-keyboard="false" data-backdrop="static" onclick="fetchDiagnosticsInfo()"><img src="images/diagnosticsIcon_GR.png" aria-hidden=”true” /><span data-label = "SHOW_DIAGNOSTICS"/></button>
+                            {% }
+                            else { %}
+                            <button type="button" class="btn btn-default dig_btn focusable" data-toggle="modal" data-target="#diagnosticsModal" data-keyboard="false" data-backdrop="static" onclick="fetchDiagnosticsInfo()"><img src="images/diagnosticsIcon.png" aria-hidden=”true” /><span data-label = "SHOW_DIAGNOSTICS"/></button>
+                            {% }
+                        %}
+                    </div>
+                </div>
+                <div>
+                    {%
+                        if (partnerIdCheck("gr",o.partner_id)) { %}
+                            <div class="gv_wdth greece_contact">
+                                <div class="col-sm-6">
+                                    <div class="gr_bg">
+                                        <h4 data-label = "CONNECTION_ISSUES_MSG1"></h4>
+                                        <h4 data-label = "CONNECTION_ISSUES_MSG2"></h4>
+                                        <h6 class="gr_height" data-label = "CONTACT_CUST_MSG"></h6>
+                                        <span class="focusable">
+                                            <h2 class="mob_hide" id="gr_h2" ><img src="images/callIcon_GR.png" alt="callIcon"/><span data-label = "CUST_CARE_NUM"></span></h2>
+                                            <a href="tel:13888" class="mob_show greece_call_btn_mob" ><img src="images/callIcon_GR-M.png" alt="callIcon"/><span data-label = "CUST_CARE_NUM"></span></a></br>
+                                            <h2 class="mob_hide" id="gr_h2" ><img src="images/website_icon_gr.png" alt="callIcon"/><a class="focusable" data-label="CUST_SUPPORT_TEXT" href="https://www.telekom.de/speedport-ip-zur-meinmagenta-app"></a></h2>
+                                            <a href="https://help.cosmote.gr/el/contact" class="mob_show greece_call_btn_mob" ><img src="images/website_icon_gr.png" alt="callIcon"/><span data-label = "CUST_SUPPORT_TEXT"></span></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="blu_bg">
+                                    <h3 data-label = "MANAGE_HOME_NETWORK"></h3>
+                                    <h6 data-label = "TELEKOM_APP"></h6>
+                                    <div class="mob_hide">
+                                        <div class="col-md-3 hr_playstore">
+                                            <div ><a id="appstore" class="focusable" target="_blank" href="https://apps.apple.com/gr/app/cosmote/id482889196"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                            <div class="hr_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://play.google.com/store/apps/details?id=gr.cosmote.myaccount.widget"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                            <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://appgallery.cloud.huawei.com/ag/n/app/C102123117?locale=en_US&source=appshare&subsource=C102123117&shareTo=com.huawei.email&shareFrom=appmarket&shareIds=2830947469364a6cb32e36c90f79f4ac_com.huawei.email&callType=SHARE"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img class="hr_oneapp" src="images/GR-oneapp-img.png" alt="OneApp"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <img src="images/GR_QR.png" alt="OneApp QR"/>
+                                        </div>
+                                    </div>
+                                    <div class="mob_show row">
+                                        <div class="col-md-6 playstore">
+                                            <div ><a id="appstore" target="_blank" href="https://apps.apple.com/gr/app/cosmote/id482889196"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                            <div class="hr_playstore_img" ><a id="playstore" target="_blank" href="https://play.google.com/store/apps/details?id=gr.cosmote.myaccount.widget"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                            <div ><a id="Huaweistore" target="_blank" href="https://appgallery.cloud.huawei.com/ag/n/app/C102123117?locale=en_US&source=appshare&subsource=C102123117&shareTo=com.huawei.email&shareFrom=appmarket&shareIds=2830947469364a6cb32e36c90f79f4ac_com.huawei.email&callType=SHARE"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                        </div>
+                                        <div class="img3">
+                                            <img class="hr_oneapp" src="images/GR-oneapp-img.png" alt="OneApp"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% }
+                        else { %}
+                            <div class="gv_wdth">
+                                <div class="col-sm-6">
+                                    <div class="gr_bg">
+                                        {%
+                                            if (partnerIdCheck("pl",o.partner_id)) { %}
+                                                <h2 data-aria="true" data-label = "CONNECTION_ISSUES_MSG1"></h2>
+                                            {% }
+                                            else { %}
+                                                <h2 data-aria="true" data-label = "CONNECTION_ISSUES_MSG1"></h2>
+                                            {% }
+                                        %}
+                                        <h2 data-aria="true" data-label = "CONNECTION_ISSUES_MSG2"></h2>
+                                        {%
+                                            if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                <div class="chat_qr">
+                                                    <img class="mob_hide" src="images/Chat_QR_SK.png" alt="refresh"/>
+                                                    <img class="mob_show" src="images/Chat_QR_Mob_SK.png" alt="refresh"/>
+                                                    <div class="contact_sec">
+                                                        <h6 data-aria="true" data-label = "CONTACT_CUST_MSG1"></h6>
+                                                        <h6 data-aria="true" data-label = "CONTACT_CUST_MSG2"></h6>
+                                                        <h6 data-aria="true" data-label = "CONTACT_CUST_MSG3"></h6>
+                                                    </div>
+                                                </div>
+                                            {% }
+                                            else { %}
+                                                <h6 class="cust_msg_middle" data-aria="true" data-label = "CONTACT_CUST_MSG"></h6>
+                                                {%
+                                                    if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                        <h2 id="mk_h2"><img src="images/callIcon.png" />
+                                                    {% }
+                                                    else if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                        <h2><img src="images/callIcon.png" alt="refresh"/>
+                                                    {% }
+                                                    else { %}
+                                                        <h2><img src="images/callIcon.png" alt="refresh"/>
+                                                    {% }
+                                                %}
+                                                    {%
+                                                        if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span><br />
+                                                            <img src="images/email.png"/>
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_EMAIL"></span> 
+                                                        {% }
+                                                        else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span><br />
+                                                            <img src="images/email.png"/>
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_EMAIL"></span> 
+                                                        {% }
+                                                        else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span><br />
+                                                            <img src="images/website_icon.png"/>
+                                                            <a class="focusable mgnt" data-label="CUST_SUPPORT_TEXT" href="https://www.t-mobile.cz/infolinka-pro-neslysici"></a>
+                                                        {% }
+                                                        else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span>
+                                                        {% }
+                                                        else { %}
+                                                            <span class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span>
+                                                            <br /><span style="visibility: hidden;" class="focusable mgnt" data-aria="true" data-label = "CUST_CARE_NUM"></span>
+                                                        {% }
+                                                    %}
+                                                </h2>
+                                            {% }
+                                        %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="blu_bg">
+                                    <h3 data-label = "MANAGE_HOME_NETWORK"></h3>
+                                    <h6 data-label = "TELEKOM_APP"></h6>
+                                    <div class="mob_hide">
+                                        {%
+                                            if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                <div class="col-md-3 playstore">
+                                                    <div class="pl_appstore_img"><a id="appstore" class="focusable" target="_blank" href="https://apps.apple.com/pl/app/m%C3%B3j-t-mobile/id495153613?l=pl"><img id="appstoreImage" src="images/PL_AppStoreBTN.png" data-alt="ALT_APP_STORE" /></a></div>
+                                                    <div ><a id="playstore" target="_blank" class="focusable" href="https://play.google.com/store/apps/details?id=pl.tmobile.miboa&hl=pl"><img id="playstoreImage" src="images/PL_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE" /></a></div>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                <div class="col-md-3 cz_playstore">
+                                                    <div ><a id="appstore" class="focusable" target="_blank" href="https://apps.apple.com/cz/app/m%C5%AFj-t-mobile/id1386652007"><img id="appstoreImage" src="images/CZ_AppStoreBTN.png" data-alt="ALT_APP_STORE"/></a></div>
+                                                    <div class="cz_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://play.google.com/store/apps/details?id=cz.tmobile.oneapp"><img id="playstoreImage" src="images/CZ_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE"/></a></div>
+                                                    <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://appgallery.huawei.com/#/app/C101395653?locale=cs_CZ&source=appshare&subsource=C101395653"><img id="HuaweistoreImage" src="images/CZ_HuaweiStoreBTN.png" data-alt="ALT_APP_GALLARY"/></a></div>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                <div class="col-md-3 hr_playstore">
+                                                    <div ><a id="appstore" class="focusable" target="_blank" href="https://mojt.page.link/470"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" data-alt="ALT_APP_STORE"/></a></div>
+                                                    <div class="hr_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://mojt.page.link/470"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE"/></a></div>
+                                                    <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://appgallery.huawei.com/app/C101201823?sharePrepath=ag&channelId=EURSMKT20200821MT&detailType=0&utm_source=modem&utm_medium=QR_kod&utm_content=RDK_QR_codes&utm_campaign=QRkod-RDK-modem-fix-hrvatskitelekom-aae-mid-brand"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" data-alt="ALT_APP_GALLARY"/></a></div>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                <div class="col-md-3 mk_playstore">
+                                                    <div ><a id="appstore" class="focusable" target="_blank" href="https://apps.apple.com/us/app/telekom-mk/id911394882"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" data-alt="ALT_APP_STORE"/></a></div>
+                                                    <div class="mk_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://play.google.com/store/apps/details?id=com.telekom.telekommk"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE"/></a></div>
+                                                    <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://appgallery.huawei.com/app/C102731711"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" data-alt="ALT_APP_GALLARY"/></a></div>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                <div class="col-md-3 sk_playstore">
+                                                    <div ><a id="appstore" class="focusable" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="appstoreImage" src="images/SK_AppStoreBTN.png" data-alt="ALT_APP_STORE"/></a></div>
+                                                    <div class="sk_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="playstoreImage" src="images/SK_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE"/></a></div>
+                                                    <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="HuaweistoreImage" src="images/SK_HuaweiStoreBTN.png" data-alt="ALT_APP_GALLARY"/></a></div>
+                                                </div>
+                                            {% }
+                                            else if (partnerIdCheck("me",o.partner_id)){ %}
+                                                <div class="col-md-3 me_playstore">
+                                                    <div ><a id="appstore" class="focusable" target="_blank" href="https://apps.apple.com/us/app/telekom-me/id1106471260"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" data-alt="ALT_APP_STORE"/></a></div>
+                                                    <div class="me_playstore_img" ><a id="playstore" class="focusable" target="_blank" href="https://play.google.com/store/apps/details?id=com.telekom.telekomme&hl=en&gl=US"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" data-alt="ALT_PLAY_STORE"/></a></div>
+                                                    <div ><a id="Huaweistore" class="focusable" target="_blank" href="https://appgallery.huawei.com/app/C101678277"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" data-alt="ALT_APP_GALLARY"/></a></div>
+                                                </div>
+                                            {% }
+                                            else { %}
+                                                <div class="col-md-3 playstore">
+                                                    <img src="images/PlayStoreQR.png" data-alt="ALT_PLAY_STORE"/>
+                                                </div>
+                                            {% }
+                                        %}
+                                        <div class="col-md-6">
+                                            {%
+                                                if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                    <img class="pl_oneapp" src="images/PL-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR" />
+                                                {% }
+                                                else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                    <img id="czOneAppImg" class="cz_oneapp" src="images/CZ-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                    <img id="hrOneAppImg" class="hr_oneapp" src="images/HR-version-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                    <img class="mk_oneapp" src="images/MK-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                    <img class="sk_oneapp" src="images/SK-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("me",o.partner_id)){ %}
+                                                    <img id="meOneAppImg" class="me_oneapp" src="images/ME-oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                                else { %}
+                                                    <img src="images/oneapp-img.png" data-alt="ALT_TELEKOM_APP_QR"/>
+                                                {% }
+                                            %}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {%
+                                                if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                    <div  class="qrCode_section">
+                                                        <div class="qrCode">
+                                                            <img src="images/PL_QR.png" alt="OneApp QR" data-alt="ALT_TELEKOM_APP_QR" >
+                                                        </div>
+                                                    </div>
+                                                        <p class="app_name" data-label = "PL_APP_NAME"></p>
+                                                {% }
+                                                else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                    <img src="images/CZ_QR.png" alt="OneApp QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                    <img src="images/HR_QR.png" alt="OneApp QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                    <img src="images/MK_QR.png" alt="OneApp QR"/>
+                                                {% }
+                                                else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                    <img src="images/SK_QR.png" alt="OneApp QR"/>
+                                                {% } 
+                                                else if (partnerIdCheck("me",o.partner_id)){ %}
+                                                    <img src="images/ME_QR.png" alt="OneApp QR"/>
+                                                {% }                                               
+                                                else { %}
+                                                    <img src="images/AppStoreQR.png" alt="APPStore"/>
+                                                {% }
+                                            %}
+                                        </div>
+                                    </div>
+                                    <div class="mob_show row">
+                                        <div class="col-md-6 playstore">
+                                            {%
+                                                if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                    <div class="img2"><a id="mobappstore" target="_blank" href="https://apps.apple.com/pl/app/m%C3%B3j-t-mobile/id495153613?l=pl"><img id="mobappstoreImage" src="images/PL_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="img1"><a id="mobplaystore" target="_blank" href="https://play.google.com/store/apps/details?id=pl.tmobile.miboa&hl=pl"><img id="mobplaystoreImage" src="images/PL_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                    {% }
+                                                else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                    <div ><a id="mobappstore" target="_blank" href="https://apps.apple.com/cz/app/m%C5%AFj-t-mobile/id1386652007"><img id="mobappstoreImage" src="images/CZ_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="cz_playstore_img" ><a id="mobplaystore" target="_blank" href="https://play.google.com/store/apps/details?id=cz.tmobile.oneapp"><img id="mobplaystoreImage" src="images/CZ_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                    <div ><a id="mobhuaweistore" target="_blank" href="https://appgallery.huawei.com/#/app/C101395653?locale=cs_CZ&source=appshare&subsource=C101395653"><img id="mobhuaweistoreImage" src="images/CZ_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                                {% }
+                                                else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                    <div ><a id="appstore" target="_blank" href="https://mojt.page.link/470"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="hr_playstore_img" ><a id="playstore" target="_blank" href="https://mojt.page.link/470"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                    <div ><a id="Huaweistore" target="_blank" href="https://appgallery.huawei.com/app/C101201823?sharePrepath=ag&channelId=EURSMKT20200821MT&detailType=0&utm_source=modem&utm_medium=QR_kod&utm_content=RDK_QR_codes&utm_campaign=QRkod-RDK-modem-fix-hrvatskitelekom-aae-mid-brand"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                                {% }
+                                                else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                    <div ><a id="appstore" target="_blank" href="https://apps.apple.com/us/app/telekom-mk/id911394882"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="mk_playstore_img" ><a id="playstore" target="_blank" href="https://play.google.com/store/apps/details?id=com.telekom.telekommk"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                    <div ><a id="Huaweistore" target="_blank" href="https://appgallery.huawei.com/app/C102731711"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                                {% }
+                                                else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                    <div ><a id="mobappstore" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="mobappstoreImage" src="images/SK_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="sk_playstore_img" ><a id="mobplaystore" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="mobplaystoreImage" src="images/SK_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                    <div ><a id="mobhuaweistore" target="_blank" href="https://telekomsk.page.link/TX4L"><img id="mobhuaweistoreImage" src="images/SK_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                                {% }
+                                                else if (partnerIdCheck("me",o.partner_id)){ %}
+                                                        <div ><a id="appstore" target="_blank" href="https://apps.apple.com/us/app/telekom-me/id1106471260"><img id="appstoreImage" src="images/EN_AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                        <div class="me_playstore_img" ><a id="playstore" target="_blank" href="https://play.google.com/store/apps/details?id=com.telekom.telekomme&hl=en&gl=US"><img id="playstoreImage" src="images/EN_PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                        <div ><a id="Huaweistore" target="_blank" href="https://appgallery.huawei.com/app/C101678277"><img id="HuaweistoreImage" src="images/EN_HuaweiStoreBTN.png" alt="Huaweistore"/></a></div>
+                                                {% }
+                                                else { %}
+                                                    <div class="img2"><a target="_blank" href="https://apps.apple.com/hu/app/telekom-alkalmaz%C3%A1s/id588993858"><img src="images/AppStoreBTN.png" alt="APPStore"/></a></div>
+                                                    <div class="img1"><a target="_blank" href="https://play.google.com/store/apps/details?id=hu.telekom.telekomapp&hl=en"><img src="images/PlayStoreBTN.png" alt="Playstore"/></a></div>
+                                                {% }
+                                            %}
+                                        </div>
+                                        <div class="img3">
+                                            {%
+                                                if (partnerIdCheck("pl",o.partner_id)){ %}
+                                                    <img class="pl_oneapp" src="images/PL-oneapp-img.png"/>
+                                                    {% }
+                                                else if (partnerIdCheck("cz",o.partner_id)){ %}
+                                                    <img id="mobCzOneAppImg" class="cz_oneapp" src="images/CZ-oneapp-img.png"/>
+                                                {% }
+                                                else if (partnerIdCheck("hr",o.partner_id)){ %}
+                                                    <img id="mobHrOneAppImg" class="hr_oneapp" src="images/HR-version-oneapp-img.png"/>
+                                                {% }
+                                                else if (partnerIdCheck("mk",o.partner_id)){ %}
+                                                    <img class="mk_oneapp" src="images/MK-oneapp-img.png"/>
+                                                {% }
+                                                else if (partnerIdCheck("sk",o.partner_id)){ %}
+                                                    <img class="sk_oneapp" src="images/SK-oneapp-img.png"/>
+                                                {% }
+                                                else if (partnerIdCheck("me",o.partner_id)){ %}
+                                                    <img id="mobMeOneAppImg" class="me_oneapp" src="images/ME-oneapp-img.png"/>
+                                                {% }
+                                                else { %}
+                                                    <img src="images/oneapp-img.png"/>
+                                                {% }
+                                            %}
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% }
+                    %}
+
+ 
+                </div>
+                <div class="text-center soft_footer">
+                    <div class="col-sm-12 open_source_label" data-toggle="modal" data-target="#open_source_popup" data-keyboard="false" data-backdrop="static">
+                        <img src="images/OpenSourceIcon.png" aria-hidden="true" />
+                        <a class="focusable" href="javascript:void(0)"> 
+                            <label data-label = "OPENSOURCE_SW"></label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+    <div class="modal fade" id="diagnosticsModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close modalCloseBtn focusable" data-dismiss="modal" onclick="refreshStatus()"><img src="images/closeIcon.png" data-alt="ALT_CLOSE" /></button>
+                    <h1 class="modal-title pageTitle" data-label="DIAGNOSTICS_PAGE"></h1>
+                </div>
+                <label class="col-sm-12 diagnostics_desc" data-label="DIAGNOSTICS_DESC"></label>
+                <div class="modal-body mx-3">
+                    <form class="form-horizontal formContent" action="">
+                        <div id="diagnostics-content">
+                            <div class="diagnosticsPageSectionHeading">
+                            <h2 class="h2_margin firstheading" data-label="DEVICE_INFO"></h2> 
+                            <div id="deviceInfoRefreshButton" style="display: none;">
+                                <a class="diagnosticsRefreshStatusLink" href="javascript:void(0)" onclick='refreshSection("deviceInfo");'><img src="images/refreshIcon.png" alt="refresh"/> <span data-label = "REFRESH_SECTION" ></span></a></div>
+                            </div>
+                            <div id="device-info-section">
+                                <img class="refreshIcon" src="images/refreshIcon.png" alt="Loading"/>
+                            </div>
+                            <div class="diagnosticsPageSectionHeading">
+                                <h2 class="h2_margin"  data-label="NETWORK_INFO"></h2> 
+                                <div id="networkInfoRefreshButton" style="display: none;"><a class="diagnosticsRefreshStatusLink" href="javascript:void(0)" onclick='refreshSection("network");'><img src="images/refreshIcon.png" alt="refresh"/> <span data-label = "REFRESH_SECTION" ></span></a></div>
+                            </div>
+                            <div id="network-info-section">
+                                <img class="refreshIcon" src="images/refreshIcon.png" alt="Loading"/>
+                            </div>
+                            <div class="diagnosticsPageSectionHeading">
+                                <h2 class="h2_margin"  data-label="PPPOE"></h2>
+                                <div id="pppoeRefreshButton" style="display: none;"><a class="diagnosticsRefreshStatusLink" href="javascript:void(0)" onclick='refreshSection("pppoe");'><img src="images/refreshIcon.png" alt="refresh"/> <span data-label = "REFRESH_SECTION" ></span></a></div>
+                            </div>
+                            <div id="pppoe-section">
+                                <img class="refreshIcon" src="images/refreshIcon.png" alt="Loading"/>
+                            </div>
+                            <div id="wan-section">
+                                <h2 class="h2_margin"  data-label="GPON"></h2>
+                                <img class="refreshIcon" src="images/refreshIcon.png" alt="Loading"/>
+                            </div>
+                            <div id="greece_telephone" style="display: none;">
+                                <div class="diagnosticsPageSectionHeading">
+                                    <h2 class="h2_margin"  data-label="TELEPHONE"></h2> 
+                                    <div id="telephoneRefreshButton" style="display: none;"><a class="diagnosticsRefreshStatusLink" href="javascript:void(0)" onclick='refreshSection("telephone");'><img src="images/refreshIcon.png" alt="refresh"/> <span data-label = "REFRESH_SECTION" ></span></a></div>
+                                </div>
+                                <div id="telephone-section">
+                                    <img class="refreshIcon" src="images/refreshIcon.png" alt="Loading"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <script type="text/x-tmpl" id="diagnostics-device-info-content-tmpl">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="serialNum" data-label="SERIAL_NUM"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.serialNum%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="vendor" data-label="VENDOR"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.vendor%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="modelNum" data-label="MODEL_NUM"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.model%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="uptime" data-label="UPTIME"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.uptime%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="oui" data-label="OUI"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.oui%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="macAddress" data-label="MAC_ADD"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.macAdd%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="Softwareversion" data-label="SW_VERSION"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.swVersion%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="bootloaderversion" data-label="BOOTLOADER_VERSION"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.bootloader_version%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                </script>
+
+                <script type="text/x-tmpl" id="diagnostics-network-content-tmpl">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="primaryDns" data-label="PRIMARY_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.primary_dns%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="secondaryDns" data-label="SECONDARY_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.secondary_dns%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="subnetMask" data-label="SUBNET_MASK"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.subnetMask%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="PublicIPv4address" data-label="PUBLIC_IPV4_ADD"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.public_ipv4Address%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="PublicIPv6address" data-label="PUBLIC_IPV6_ADD"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.public_ipv6Address%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="IPv6delegatedprefix" data-label="IPV6_PREFIX"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.ipv6Prefix%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="IPv4LANaddress" data-label="IPV4_LAN_ADD"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.ipv4_lan_cidr%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="IPv6LANaddress" data-label="IPV6_LAN_ADD"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.ipv6_lan_address%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="thirdDns" data-label="THIRD_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.third_dns%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="fourthDns" data-label="FOURTH_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.fourth_dns%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="fifthDns" data-label="FIFTH_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.fifth_dns%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="sixthDns" data-label="SIXTH_DNS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.sixth_dns%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                </script>
+
+                <script type="text/x-tmpl" id="diagnostics-pppoe-content-tmpl">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="pppoeStatus" data-label="PPPOE_STATUS"></label>
+                        <div class="col-sm-6 formData">
+                        {%
+                            if (o.pppoe_status == 'Up') { %}
+                                <span class="grn"></span><span data-label="CONNECTED"></span>
+                            {% }
+                            else { %}
+                                <span class="gry"></span><span data-label="DISCONN"></span>
+                            {% }
+                        %}
+                        </div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="pppoeConnectionStatus" data-label="PPPOE_CONNECTION_STATUS"></label>
+                        <div class="col-sm-6 formData">
+                            {%
+                                if(o.pppoe_connection_status == "Authenticating") { %}
+                                    <span data-label="PPPOE_AUTH"></span>
+                                    {% }
+                                else if (o.pppoe_connection_status == "Connecting"){ %}
+                                    <span data-label="PPPOE_CONNECTING"></span>
+                                    {% }
+                                else if(o.pppoe_connection_status == "AuthenticationFailed") { %}
+                                    <span data-label="PPPOE_AUTH_FAILED"></span>
+                                    {% }
+                                else if (o.pppoe_connection_status == "Connected") { %}
+                                    <span data-label="PPPOE_CONNECTED"></span>
+                                    {% }
+                                else if (o.pppoe_connection_status == "Disconnected"){ %}
+                                    <span data-label="PPPOE_DISCONNE"></span>
+                                    {% }
+                            %}
+                        </div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="alias" data-label="ALIAS"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.alias%}</div>
+                    </div>
+                    <hr class="div_hr div_sk div_me div_mk">
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="lastStatusChange" data-label="LAST_STATUS_CHANGE"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.last_status_change%}</div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group">
+                        <label class="col-sm-4 formLabel" for="lastStatusError" data-label="LAST_CONNECTION_ERROR"></label>
+                        <div class="col-sm-6 formData">
+                            {%
+                                if(o.last_status_error == "ERROR_NONE") { %}
+                                    <span data-label="ERROR_NONE"></span>
+                                    {% }
+                                else if (o.last_status_error == "ERROR_UNKNOWN"){ %}
+                                    <span data-label="ERROR_UNKNOWN"></span>
+                                    {% }
+                                else if(o.last_status_error == "ERROR_USER_DISCONNECT") { %}
+                                    <span data-label="ERROR_USER_DISCONNECT"></span>
+                                    {% }
+                                else if (o.last_status_error == "ERROR_AUTHENTICATION_FAILURE"){ %}
+                                    <span data-label="ERROR_AUTHENTICATION_FAILURE"></span>
+                                    {% }
+                                else if(o.last_status_error == "ERROR_ISP_TIME_OUT") { %}
+                                    <span data-label="ERROR_ISP_TIME_OUT"></span>
+                                    {% }
+                                else if (o.last_status_error == "ERROR_LCP_TIMEOUT"){ %}
+                                    <span data-label="ERROR_LCP_TIMEOUT"></span>
+                                    {% }
+                                else if(o.last_status_error == "ERROR_AUTH_TIMEOUT") { %}
+                                    <span data-label="ERROR_AUTH_TIMEOUT"></span>
+                                    {% }
+                                else if (o.last_status_error == "ERROR_IPCP_TIMEOUT"){ %}
+                                    <span data-label="ERROR_IPCP_TIMEOUT"></span>
+                                    {% }
+                                else if(o.last_status_error == "ERROR_IPv6CP_TIMEOUTUnconfigured") { %}
+                                    <span data-label="ERROR_IPv6CP_TIMEOUTUnconfigured"></span>
+                                    {% }
+                            %}
+                        </div>
+                    </div>
+                    <div class="hr-line"></div>
+                    <div class="form-group div_hr div_sk div_me div_mk">
+                        <label class="col-sm-4 formLabel" for="session_id" data-label="SESSION_ID"></label>
+                        <div class="col-sm-6 formData" data-aria="true">{%#o.session_id%}</div>
+                    </div>                                
+                    <hr class="div_hr div_sk div_me div_mk">
+                </script>
+
+                <script type="text/x-tmpl" id="diagnostics-wan-type-content-tmpl">
+                    {%
+                        if (o.GPON_link_status == 'O5') { %}
+                            <h2 class="h2_margin" data-label="GPON"></h2>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="type" data-label="TYPE"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.type%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="opticalModel" data-label="OPTICAL_MODEL"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.optical_model%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+							{%
+                                if (partnerIdCheck("gr",o.partner_id)) { %}
+                                    <div class="form-group">
+										<label class="col-sm-4 formLabel" for="gponSerialNumber" data-label="GPON_SERIAL_NUMBER"></label>
+                                        <div class="col-sm-6 formData" data-aria="true">{%#o.gpon_serial_number%}</div>
+                                    </div>
+                                    <div class="hr-line"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 formLabel" for="optLinkStatus" data-label="OPTICAL_LINK_STATUS"></label>
+                                        <div class="col-sm-6 formData">
+                                        {%
+                                            if (o.optical_link_status == 'Up') { %}
+                                                <span class="grn"></span><span data-label="CONNECTED"></span>
+                                            {% }
+                                            else { %}
+                                                <span class="gry"></span><span data-label="DISCONN"></span>
+                                            {% }
+                                        %}
+                                        </div>
+                                    </div>
+                                    <div class="hr-line"></div>
+                                {% }
+                                else { %}
+                                    <div class="form-group">
+                                        <label class="col-sm-4 formLabel" for="optLinkStatus" data-label="OPTICAL_LINK_STATUS"></label>
+                                        <div class="col-sm-6 formData">
+                                        {%
+                                            if (o.optical_link_status == 'Up') { %}
+                                                <span class="grn"></span><span data-label="CONNECTED"></span>
+                                            {% }
+                                            else { %}
+                                                <span class="gry"></span><span data-label="DISCONN"></span>
+                                            {% }
+                                        %}
+                                        </div>
+                                    </div>
+                                    <div class="hr-line"></div>
+                                    <div class="form-group div_hr div_sk div_me div_mk">
+                                        <label class="col-sm-4 formLabel" for="registrationState" data-label="REGISTRATION_STATE"></label>
+                                        <div class="col-sm-6 formData" data-aria="true">{%#o.registration_state%}</div>
+                                    </div>
+                                    <hr class="div_hr div_sk div_me div_mk">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 formLabel" for="gponSerialNumber" data-label="GPON_SERIAL_NUMBER"></label>
+                                        <div class="col-sm-6 formData" data-aria="true">{%#o.gpon_serial_number%}</div>
+                                    </div>
+                                    <div class="hr-line"></div>
+                                {% }
+                            %}							
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="rxsignallevel" data-label="RX_SIGNAL_LEVEL"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.rx_signal_level%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="txsignallevel" data-label="TX_SIGNAL_LEVEL"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.tx_signal_level%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="voltagelevel" data-label="VOLTAGE_LEVEL"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.voltage_level%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group div_hr div_sk div_me div_mk">
+                                <label class="col-sm-4 formLabel" for="signalfail" data-label="SIGNAL_FAIL"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.signal_fail%}</div>
+                            </div>
+                            <hr class="div_hr div_sk div_me div_mk">
+                            <div class="form-group div_hr div_sk div_me div_mk">
+                                <label class="col-sm-4 formLabel" for="signaldegrade" data-label="SIGNAL_DEGRADE"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.signal_degrade%}</div>
+                            </div>
+                            <hr class="div_hr div_sk div_me div_mk">
+                            <div class="form-group div_hr div_sk div_me div_mk">
+                                <label class="col-sm-4 formLabel" for="frameslost" data-label="FRAMES_LOST"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.frames_lost%}</div>
+                            </div>
+                            <hr class="div_hr div_sk div_me div_mk">
+                            <div class="form-group div_hr div_sk div_me div_mk">
+                                <label class="col-sm-4 formLabel" for="downStream" data-label="DOWNSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.gpon_downstream%}</div>
+                            </div>
+                            <hr class="div_hr div_sk div_me div_mk">
+                            <div class="form-group div_hr div_sk div_me div_mk">
+                                <label class="col-sm-4 formLabel" for="upStream" data-label="UPSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.gpon_upstream%}</div>
+                            </div>
+                            <hr class="div_hr div_sk div_me div_mk">
+                        {% }
+                        if (o.DSL_link_status  == 'Up') { %}
+                            <h4 data-label="DSL"></h4>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="dslLinkStatus" data-label="DSL_LINK_STATUS"></label>
+                                <div class="col-sm-6 formData">
+                                {%
+                                    if (o.DSL_link_status == 'Up') { %}
+                                        <span class="grn"></span><span data-label="CONNECTED"></span>
+                                    {% }
+                                    else { %}
+                                        <span class="gry"></span><span data-label="DISCONN"></span>
+                                    {% }
+                                %}
+                                </div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="crcErrors" data-label="CRC_ERRORS"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.crcErrors%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="fecErrors" data-label="FEC_ERRORS"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.fecErrors%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="attenuation" data-label="ATTENUATION_DOWN"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.attenuationDown%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="attenuation" data-label="ATTENUATION_UP"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.attenuationUp%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="powerdownStream" data-label="POWER_DOWNSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.powerDown%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="powerupStream" data-label="POWER_UPSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.powerUp%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="errorsReceived" data-label="ERRORS_RECEIVED"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.errors_received%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="errorsSent" data-label="ERRORS_SENT"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.errors_sent%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="downStream" data-label="DOWNSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.dsl_downstream%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                            <div class="form-group">
+                                <label class="col-sm-4 formLabel" for="upStream" data-label="UPSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.dsl_upstream%}</div>
+                            </div>
+                            <div class="hr-line"></div>
+                        {% }
+                    %}
+                    {%
+                        if (o.wanoe_mode == 'true') { %}
+                            <h4 class="div_sk div_mk" data-label="INTERNET_STATUS"></h4>
+                                <div class="form-group div_sk div_mk">
+                                    <label class="col-sm-4 formLabel" for="downStream" data-label="DOWNSTREAM"></label>
+                                    <div class="col-sm-6 formData" data-aria="true">{%#o.internet_status_downstream%}</div>
+                                </div>
+                            <hr class="div_sk div_mk">
+                            <div class="form-group div_sk div_mk">
+                                <label class="col-sm-4 formLabel" for="upStream" data-label="UPSTREAM"></label>
+                                <div class="col-sm-6 formData" data-aria="true">{%#o.internet_status_upstream%}</div>
+                            </div>
+                            <hr class="div_sk div_mk">
+                        {% }
+                    %}
+                </script>
+
+                <script type="text/x-tmpl" id="diagnostics-greece-telephone-content-tmpl">
+                    <div>
+                        <div class="mob_hide">
+                            <div class="greece_telephone">
+                                <div class="col-sm-4">
+                                    <h6 data-label="PHONE_NUMBER"></h6>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h6 data-label="STATUS"></h6>
+                                </div>
+                                <div class="col-sm-3">
+                                    <h6 data-label="UPTIME"></h6>
+                                </div>
+                            </div>
+                            {%
+                                if (o.registered_phone_numbers > 0) {
+                                    for (var i=1; i<=o.registered_phone_numbers; i++) { %}
+                                        <div class="form-group greece_tel_status">
+                                            <div class="col-sm-4 formLabel">
+                                                <span data-label="NUMBER_X"></span><span>{%=o.phone_numbers.split(",")[i]%}</span>
+                                            </div>
+                
+                                            <div class="col-sm-3 formData">
+                                                {%
+                                                    if (o.phone_numbers_reach.split(",")[i] == 'In_reach') { %}
+                                                        <span class="grn"></span><span data-label="ACTIVE"></span>
+                                                    {% }
+                                                    else { %}
+                                                        <span class="gry"></span><span data-label="INACTIVE"></span>
+                                                    {% }
+                                                %}
+                                            </div>
+                
+                                            <div class="col-sm-3 formLabel greece_tel_uptime">
+                                                <span>{%=o.phone_numbers_uptime.split(";")[i]%}</span>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line"></div>
+                                    {% }
+                                } else { %}
+                                    <div class="form-group greece_tel_status">
+                                        <div class="col-sm-4 formLabel">
+                                            <span data-label="NO_TELEPHONE_REGISTERED"></span>
+                                        </div>
+                                        <div class="col-sm-3 formData">
+                                            <span>-</span>
+                                        </div>
+                
+                                        <div class="col-sm-3 formLabel greece_tel_uptime">
+                                            <span>-</span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line"></div>
+                                {% }
+                            %}
+                        </div>
+                        <div class="mob_show">
+                            <div class="mob_greece_telephone">
+                                <div class="form-group">
+                                    <label class="col-sm-4 formLabel">
+                                        <h6 data-label="PHONE_NUMBER"></h6>
+                                    </label>
+                                    <div class="col-sm-6 formData status">
+                                        <h6 data-label="STATUS"></h6>
+                                    </div>
+                                </div>
+                                <div class="hr-line"></div>
+                                {%
+                                    if (o.registered_phone_numbers > 0) {
+                                        for (var i=1; i<=o.registered_phone_numbers; i++) { %}
+                                            <div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 formLabel">
+                                                    <span data-label="NUMBER_X"></span><span>{%=o.phone_numbers.split(",")[i]%}</span>
+                                                </label>
+                
+                                                <div class="col-sm-6 formData">
+                                                    {%
+                                                        if (o.phone_numbers_reach.split(",")[i] == 'In_reach') { %}
+                                                            <span class="grn"></span><span data-label="ACTIVE"></span>
+                                                        {% }
+                                                        else { %}
+                                                            <span class="gry"></span><span data-label="INACTIVE"></span>
+                                                        {% }
+                                                    %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div class="hr-line"></div>
+                                        {% }
+                                    } else { %}
+                                        <div class="form-group">
+                                            <label class="col-sm-4 formLabel">
+                                                <span data-label="NO_TELEPHONE_REGISTERED"></span>
+                                            </label>
+                                            <div class="col-sm-6 formData">
+                                                <span>-</span>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line"></div>
+                                    {% }
+                                %}
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                
+
+
+                <script type="text/x-tmpl" id="diagnostics-alert-message-tmpl">
+                        <div id="alertContentDiagnosticsPage">
+                            <div class="form-group diagnostics_error_container">
+                                <div class="diagnostics_error_content">
+                                    <div style="display: flex;">
+                                        <img src="images/alertImage.png" class="alertIcon" alt="alert">
+                                        <div>
+                                            <p class="diagnostics_error_title" data-label="ALERT_HEADING"></p>
+                                            <div class="mob_hide">
+                                                <p class="diagnostics_error_msg" data-label="ALERT_PARAGRAGH_1"></p>
+                                                <p class="diagnostics_error_msg" data-label="ALERT_PARAGRAGH_2"></p>
+                                            </div>
+                                            <div class="diagnostics_mob_show">
+                                                <span class="diagnostics_error_msg" data-label="ALERT_PARAGRAGH_1"></span>
+                                                <span class="diagnostics_error_msg" data-label="ALERT_PARAGRAGH_2"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="hr-line"></div>
+                        </div>
+                </script>
+
+                <script type="text/x-tmpl" id="diagnostics-gpon-tmpl">
+                    <div class="diagnosticsPageSectionHeading">
+                        <h2 class="h2_margin" data-label="GPON"></h2>
+                        <div id="gponRefreshButton" style="display: none;">
+                            <a class="diagnosticsRefreshStatusLink" href="javascript:void(0)" onclick='refreshSection("wanType");'>
+                                <img src="images/refreshIcon.png" alt="refresh"/> <span data-label = "REFRESH_SECTION" ></span>
+                            </a>
+                        </div>
+                    </div>
+                </script>
+        </div>
+        </div>
+        </div>
+        <div class="modal fade" style="display: none;" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-sm applyPosition" role="document">
+			<div class="modal-content">
+				<h4 class="hiddenui_modal_title"><span data-label= "ERROR"></span></h4>
+				<div class="modal-body">
+					<img src="../images/warningImage.png" alt="Modal Image" class="modal-image">
+					<div class="modal-para">
+						<p class="inline-paragraph modal-paramsg"><span data-label= "ERRORMSG"></span></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default errorPopupBtn" data-dismiss="modal" aria-label="Close" data-label="NEWSESSIONBTN"></button>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div id = "restartContent"></div>
+		<div id = "resetContent"></div>
+        <div id="open_source_content"></div>
+        <script>
+            initKeyboardNavigation();
+        </script>            
+    </body>
+</html>
