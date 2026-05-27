@@ -22,7 +22,7 @@ management panel. It ships in three layers:
 | Live update | 5 s polling | SSE `/api/stream` (event-hub pub/sub) |
 | State mutation | no | Wi-Fi, network, restart, factory reset |
 
-![Dashboard](./admin-dashboard.png)
+![Dashboard](./screenshots/admin-en-dashboard.png)
 
 ---
 
@@ -267,8 +267,16 @@ Additionally:
 - **Icons** — single inline SVGs embedded in CSS as `mask-image` (zero
   external dependencies, coloured via `currentColor`).
 
-![Dashboard view](./admin-dashboard-view.png)
-![Mobile view](./admin-mobile-view.png)
+### Screenshots
+
+| | |
+|---|---|
+| **Login** — dark, minimal, branded | **Dashboard** — hero, tiles, sparklines, top devices |
+| ![Login](./screenshots/admin-en-login.png) | ![Dashboard](./screenshots/admin-en-dashboard.png) |
+| **Wi-Fi** — 2.4G / 5G / guest config | **Devices** — live client list |
+| ![Wi-Fi](./screenshots/admin-en-wifi.png) | ![Devices](./screenshots/admin-en-devices.png) |
+| **Diagnostics** — ping / traceroute terminal | **System** — info & service actions |
+| ![Diagnostics](./screenshots/admin-en-diagnostics.png) | ![System](./screenshots/admin-en-system.png) |
 
 ---
 
@@ -330,9 +338,13 @@ magenta-box/
 ├── requirements.txt                   # For option B (FastAPI)
 ├── router.db                          # SQLite — auto-created (gitignored)
 │
-├── admin-dashboard.png                # Screenshots (used by README)
-├── admin-dashboard-view.png
-├── admin-mobile-view.png
+├── screenshots/                        # Screenshots used by the READMEs
+│   ├── admin-en-login.png
+│   ├── admin-en-dashboard.png
+│   ├── admin-en-wifi.png
+│   ├── admin-en-devices.png
+│   ├── admin-en-diagnostics.png
+│   └── admin-en-system.png
 │
 ├── LICENSE                            # MIT — scoped to original code only
 ├── README.md                          # Polish README
