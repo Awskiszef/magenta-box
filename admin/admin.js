@@ -11,16 +11,270 @@ const state = {
   evt: null,
   cleanup: null,
   appendLog: null,
+  lang: localStorage.getItem("adminLang") || "pl",
 };
 
 const viewMeta = {
-  dashboard: ["Dashboard", "Stan urządzenia w czasie rzeczywistym"],
-  wifi: ["Wi-Fi", "Konfiguracja sieci bezprzewodowej"],
-  network: ["Sieć", "Adresacja LAN, DHCP i DNS"],
-  devices: ["Urządzenia", "Klienci aktywni w sieci domowej"],
-  diagnostics: ["Diagnostyka", "Testy sieciowe wykonywane po stronie routera"],
-  logs: ["Logi", "Strumień zdarzeń systemowych"],
-  system: ["System", "Informacje i akcje serwisowe"],
+  dashboard: ["nav.dashboard", "view.dashboardSub"],
+  wifi: ["nav.wifi", "view.wifiSub"],
+  network: ["nav.network", "view.networkSub"],
+  devices: ["nav.devices", "view.devicesSub"],
+  diagnostics: ["nav.diagnostics", "view.diagnosticsSub"],
+  logs: ["nav.logs", "view.logsSub"],
+  system: ["nav.system", "view.systemSub"],
+};
+
+const I18N = {
+  pl: {
+    "app.langLabel": "Język",
+    "login.eyebrow": "Panel administracyjny",
+    "login.title": "Zarządzaj siecią bez zgadywania.",
+    "login.copy": "Live status, konfiguracja Wi-Fi, diagnostyka i logi w jednym czystym widoku.",
+    "login.password": "Hasło",
+    "login.submit": "Zaloguj",
+    "login.demo": "Demo:",
+    "login.error": "Błąd logowania",
+    "aria.sidebar": "Nawigacja",
+    "aria.nav": "Główne widoki",
+    "aria.theme": "Zmień motyw",
+    "aria.logout": "Wyloguj",
+    "aria.menu": "Otwórz menu",
+    "nav.dashboard": "Dashboard",
+    "nav.wifi": "Wi-Fi",
+    "nav.network": "Sieć",
+    "nav.devices": "Urządzenia",
+    "nav.diagnostics": "Diagnostyka",
+    "nav.logs": "Logi",
+    "nav.system": "System",
+    "sidebar.logged": "Zalogowany",
+    "topbar.live": "live",
+    "view.dashboardSub": "Stan urządzenia w czasie rzeczywistym",
+    "view.wifiSub": "Konfiguracja sieci bezprzewodowej",
+    "view.networkSub": "Adresacja LAN, DHCP i DNS",
+    "view.devicesSub": "Klienci aktywni w sieci domowej",
+    "view.diagnosticsSub": "Testy sieciowe wykonywane po stronie routera",
+    "view.logsSub": "Strumień zdarzeń systemowych",
+    "view.systemSub": "Informacje i akcje serwisowe",
+    "common.loading": "Ładowanie...",
+    "common.loadingWifi": "Ładowanie Wi-Fi...",
+    "common.loadingNetwork": "Ładowanie sieci...",
+    "common.loadingSystem": "Ładowanie systemu...",
+    "common.working": "Pracuje...",
+    "common.refresh": "Odśwież",
+    "common.retry": "Spróbuj ponownie",
+    "common.errorTitle": "Coś poszło nie tak",
+    "common.fetchError": "Nie udało się pobrać danych.",
+    "common.errorPrefix": "Błąd",
+    "common.dashboard": "Dashboard",
+    "common.save": "Zapisz",
+    "common.back": "Cofnij",
+    "common.noData": "Brak danych",
+    "common.noOutput": "(brak wyjścia)",
+    "common.starting": "uruchamianie...",
+    "status.online": "online",
+    "status.offline": "offline",
+    "status.active": "aktywne",
+    "status.disabled": "wyłączone",
+    "status.wired": "kablowo",
+    "dashboard.ready": "Router gotowy",
+    "dashboard.statusCopy": "Podgląd łącza, urządzeń i Wi-Fi aktualizuje się automatycznie przez Server-Sent Events.",
+    "dashboard.headlineOnline": "Połączenie działa stabilnie",
+    "dashboard.headlineOffline": "Połączenie wymaga uwagi",
+    "dashboard.copyOnline": "WAN jest online, a pasma Wi-Fi są dostępne dla domowych urządzeń.",
+    "dashboard.copyOffline": "WAN nie odpowiada. Zacznij od diagnostyki albo restartu routera.",
+    "dashboard.wifiTitle": "Sieci Wi-Fi",
+    "dashboard.wifiSub": "Aktualny broadcast SSID",
+    "dashboard.editWifi": "Edytuj Wi-Fi",
+    "dashboard.devicesTitle": "Ostatnie urządzenia",
+    "dashboard.devicesSub": "Najbardziej aktywni klienci",
+    "dashboard.devicesLink": "Lista urządzeń",
+    "dashboard.statusWan": "Status WAN",
+    "dashboard.uptime": "Czas pracy",
+    "dashboard.uptimeSub": "Od ostatniego restartu",
+    "dashboard.devicesMetric": "Urządzenia",
+    "dashboard.devicesMetricSub": "Aktywne klienty",
+    "dashboard.download": "Pobieranie",
+    "dashboard.upload": "Wysyłanie",
+    "dashboard.samples": "Ostatnie 30 próbek",
+    "dashboard.refreshed": "Dashboard odświeżony",
+    "wifi.title": "Konfiguracja Wi-Fi",
+    "wifi.sub": "Zmiany są zapisywane w mockowym stanie routera.",
+    "wifi.password": "Hasło Wi-Fi",
+    "wifi.showPassword": "Pokaż hasło",
+    "wifi.channel24": "Kanał 2.4 GHz",
+    "wifi.channel5": "Kanał 5 GHz",
+    "wifi.guestSsid": "SSID gościa",
+    "wifi.compat": "Sieć kompatybilna",
+    "wifi.fastBand": "Szybkie pasmo",
+    "wifi.guest": "Sieć gościnna",
+    "wifi.guestSub": "Izolowany dostęp",
+    "wifi.save": "Zapisz Wi-Fi",
+    "wifi.saved": "Wi-Fi zapisane",
+    "network.title": "Adresacja LAN",
+    "network.sub": "DHCP i DNS dla lokalnej sieci routera.",
+    "network.lanIp": "Adres LAN routera",
+    "network.subnet": "Maska podsieci",
+    "network.dhcpStart": "DHCP od",
+    "network.dhcpEnd": "DHCP do",
+    "network.primaryDns": "DNS główny",
+    "network.secondaryDns": "DNS zapasowy",
+    "network.save": "Zapisz sieć",
+    "network.saved": "Sieć zapisana",
+    "devices.title": "Podłączone urządzenia",
+    "devices.sub": "Tabela odświeża się automatycznie co 3 sekundy.",
+    "devices.name": "Nazwa",
+    "devices.interface": "Interfejs",
+    "devices.fetchError": "Nie udało się pobrać",
+    "diagnostics.title": "Diagnostyka łącza",
+    "diagnostics.sub": "Host jest walidowany po stronie serwera. Wynik pojawi się w terminalu poniżej.",
+    "diagnostics.host": "Host docelowy",
+    "diagnostics.placeholder": "np. 8.8.8.8",
+    "diagnostics.ready": "Wybierz test diagnostyczny.",
+    "logs.title": "Live log",
+    "logs.sub": "Nowe zdarzenia wpadają przez SSE.",
+    "logs.autoscroll": "Auto-scroll",
+    "logs.keepBottom": "Trzymaj dół",
+    "logs.clear": "Wyczyść widok",
+    "system.title": "Urządzenie",
+    "system.sub": "Firmware i identyfikatory sprzętowe.",
+    "system.serial": "Numer seryjny",
+    "system.mac": "Adres MAC",
+    "system.actions": "Akcje serwisowe",
+    "system.actionsSub": "Operacje symulowane przez mock backend.",
+    "system.restartTitle": "Restart routera",
+    "system.restartSub": "Resetuje licznik uptime po kilku sekundach.",
+    "system.factoryTitle": "Reset fabryczny",
+    "system.factorySub": "Przywraca domyślne Wi-Fi, sieć i stan urządzenia.",
+    "system.restartConfirm": "Zrestartować router?",
+    "system.factoryConfirm": "Przywrócić ustawienia fabryczne? Konfiguracja zostanie utracona.",
+    "system.restartToast": "Restart trwa",
+    "system.factoryToast": "Reset fabryczny wykonany",
+  },
+  en: {
+    "app.langLabel": "Language",
+    "login.eyebrow": "Admin panel",
+    "login.title": "Manage your network without guesswork.",
+    "login.copy": "Live status, Wi-Fi settings, diagnostics, and logs in one clean view.",
+    "login.password": "Password",
+    "login.submit": "Sign in",
+    "login.demo": "Demo:",
+    "login.error": "Login failed",
+    "aria.sidebar": "Navigation",
+    "aria.nav": "Main views",
+    "aria.theme": "Change theme",
+    "aria.logout": "Log out",
+    "aria.menu": "Open menu",
+    "nav.dashboard": "Dashboard",
+    "nav.wifi": "Wi-Fi",
+    "nav.network": "Network",
+    "nav.devices": "Devices",
+    "nav.diagnostics": "Diagnostics",
+    "nav.logs": "Logs",
+    "nav.system": "System",
+    "sidebar.logged": "Signed in",
+    "topbar.live": "live",
+    "view.dashboardSub": "Real-time device status",
+    "view.wifiSub": "Wireless network configuration",
+    "view.networkSub": "LAN addressing, DHCP, and DNS",
+    "view.devicesSub": "Active clients on the home network",
+    "view.diagnosticsSub": "Network tests run by the router",
+    "view.logsSub": "System event stream",
+    "view.systemSub": "Device information and service actions",
+    "common.loading": "Loading...",
+    "common.loadingWifi": "Loading Wi-Fi...",
+    "common.loadingNetwork": "Loading network...",
+    "common.loadingSystem": "Loading system...",
+    "common.working": "Working...",
+    "common.refresh": "Refresh",
+    "common.retry": "Try again",
+    "common.errorTitle": "Something went wrong",
+    "common.fetchError": "Could not load data.",
+    "common.errorPrefix": "Error",
+    "common.dashboard": "Dashboard",
+    "common.save": "Save",
+    "common.back": "Cancel",
+    "common.noData": "No data",
+    "common.noOutput": "(no output)",
+    "common.starting": "starting...",
+    "status.online": "online",
+    "status.offline": "offline",
+    "status.active": "active",
+    "status.disabled": "disabled",
+    "status.wired": "wired",
+    "dashboard.ready": "Router ready",
+    "dashboard.statusCopy": "Link, device, and Wi-Fi status updates automatically through Server-Sent Events.",
+    "dashboard.headlineOnline": "Connection is stable",
+    "dashboard.headlineOffline": "Connection needs attention",
+    "dashboard.copyOnline": "WAN is online, and Wi-Fi bands are available for home devices.",
+    "dashboard.copyOffline": "WAN is not responding. Start with diagnostics or restart the router.",
+    "dashboard.wifiTitle": "Wi-Fi networks",
+    "dashboard.wifiSub": "Current SSID broadcast",
+    "dashboard.editWifi": "Edit Wi-Fi",
+    "dashboard.devicesTitle": "Recent devices",
+    "dashboard.devicesSub": "Most active clients",
+    "dashboard.devicesLink": "Device list",
+    "dashboard.statusWan": "WAN status",
+    "dashboard.uptime": "Uptime",
+    "dashboard.uptimeSub": "Since last restart",
+    "dashboard.devicesMetric": "Devices",
+    "dashboard.devicesMetricSub": "Active clients",
+    "dashboard.download": "Download",
+    "dashboard.upload": "Upload",
+    "dashboard.samples": "Last 30 samples",
+    "dashboard.refreshed": "Dashboard refreshed",
+    "wifi.title": "Wi-Fi configuration",
+    "wifi.sub": "Changes are saved into the router mock state.",
+    "wifi.password": "Wi-Fi password",
+    "wifi.showPassword": "Show password",
+    "wifi.channel24": "2.4 GHz channel",
+    "wifi.channel5": "5 GHz channel",
+    "wifi.guestSsid": "Guest SSID",
+    "wifi.compat": "Compatible network",
+    "wifi.fastBand": "Fast band",
+    "wifi.guest": "Guest network",
+    "wifi.guestSub": "Isolated access",
+    "wifi.save": "Save Wi-Fi",
+    "wifi.saved": "Wi-Fi saved",
+    "network.title": "LAN addressing",
+    "network.sub": "DHCP and DNS for the local router network.",
+    "network.lanIp": "Router LAN address",
+    "network.subnet": "Subnet mask",
+    "network.dhcpStart": "DHCP from",
+    "network.dhcpEnd": "DHCP to",
+    "network.primaryDns": "Primary DNS",
+    "network.secondaryDns": "Secondary DNS",
+    "network.save": "Save network",
+    "network.saved": "Network saved",
+    "devices.title": "Connected devices",
+    "devices.sub": "The table refreshes automatically every 3 seconds.",
+    "devices.name": "Name",
+    "devices.interface": "Interface",
+    "devices.fetchError": "Could not load",
+    "diagnostics.title": "Link diagnostics",
+    "diagnostics.sub": "The host is validated server-side. Output appears in the terminal below.",
+    "diagnostics.host": "Target host",
+    "diagnostics.placeholder": "e.g. 8.8.8.8",
+    "diagnostics.ready": "Choose a diagnostic test.",
+    "logs.title": "Live log",
+    "logs.sub": "New events arrive through SSE.",
+    "logs.autoscroll": "Auto-scroll",
+    "logs.keepBottom": "Keep bottom",
+    "logs.clear": "Clear view",
+    "system.title": "Device",
+    "system.sub": "Firmware and hardware identifiers.",
+    "system.serial": "Serial number",
+    "system.mac": "MAC address",
+    "system.actions": "Service actions",
+    "system.actionsSub": "Operations simulated by the mock backend.",
+    "system.restartTitle": "Router restart",
+    "system.restartSub": "Resets the uptime counter after a few seconds.",
+    "system.factoryTitle": "Factory reset",
+    "system.factorySub": "Restores default Wi-Fi, network, and device state.",
+    "system.restartConfirm": "Restart the router?",
+    "system.factoryConfirm": "Restore factory settings? Configuration will be lost.",
+    "system.restartToast": "Restart in progress",
+    "system.factoryToast": "Factory reset completed",
+  },
 };
 
 const text = (value) => (value == null ? "" : String(value));
@@ -32,6 +286,36 @@ const escapeHTML = (value) => text(value).replace(/[&<>"']/g, (char) => ({
   "'": "&#39;",
 }[char]));
 const icon = (name) => `<span class="icon" data-icon="${name}" aria-hidden="true"></span>`;
+const t = (key) => I18N[state.lang]?.[key] || I18N.pl[key] || key;
+
+function applyLanguage() {
+  if (!I18N[state.lang]) state.lang = "pl";
+  document.documentElement.lang = state.lang;
+  localStorage.setItem("adminLang", state.lang);
+  $$("[data-i18n]").forEach((node) => {
+    node.textContent = t(node.dataset.i18n);
+  });
+  $$("[data-i18n-title]").forEach((node) => {
+    node.title = t(node.dataset.i18nTitle);
+  });
+  $$("[data-i18n-aria-label]").forEach((node) => {
+    node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));
+  });
+  $$("[data-lang]").forEach((button) => {
+    const active = button.dataset.lang === state.lang;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+}
+
+async function setLanguage(lang) {
+  if (!I18N[lang] || state.lang === lang) return;
+  state.lang = lang;
+  applyLanguage();
+  if (!$("#appShell").classList.contains("hidden")) {
+    await mount(state.view);
+  }
+}
 
 async function api(path, options = {}) {
   const request = { credentials: "same-origin", ...options };
@@ -89,16 +373,16 @@ function setBusy(button, busy, label) {
   if (!button) return;
   button.disabled = busy;
   if (label) button.dataset.readyLabel = label;
-  button.innerHTML = busy ? `${icon("refresh")} Pracuje...` : button.dataset.readyLabel;
+  button.innerHTML = busy ? `${icon("refresh")} ${t("common.working")}` : button.dataset.readyLabel;
 }
 
 function statusBadge(status) {
   const ok = text(status).toLowerCase() === "up";
-  return `<span class="status-badge ${ok ? "status-ok" : "status-err"}">${ok ? "online" : "offline"}</span>`;
+  return `<span class="status-badge ${ok ? "status-ok" : "status-err"}">${ok ? t("status.online") : t("status.offline")}</span>`;
 }
 
 function wifiBadge(enabled) {
-  return `<span class="badge ${enabled ? "badge-ok" : "badge-err"}">${enabled ? "aktywne" : "wyłączone"}</span>`;
+  return `<span class="badge ${enabled ? "badge-ok" : "badge-err"}">${enabled ? t("status.active") : t("status.disabled")}</span>`;
 }
 
 function ifaceBadge(iface) {
@@ -155,7 +439,7 @@ function drawSpark(selector, values) {
     .join("");
 }
 
-function loadingPanel(label = "Ładowanie...") {
+function loadingPanel(label = t("common.loading")) {
   return `<div class="panel empty-state">${icon("refresh")} ${escapeHTML(label)}</div>`;
 }
 
@@ -163,10 +447,10 @@ function errorPanel(error) {
   return `
     <div class="panel page-error">
       <div>
-        <h2>Coś poszło nie tak</h2>
-        <p>${escapeHTML(error?.message || "Nie udało się pobrać danych.")}</p>
+        <h2>${t("common.errorTitle")}</h2>
+        <p>${escapeHTML(error?.message || t("common.fetchError"))}</p>
       </div>
-      <button class="btn btn-secondary" type="button" onclick="mount('${state.view}')">${icon("refresh")} Spróbuj ponownie</button>
+      <button class="btn btn-secondary" type="button" onclick="mount('${state.view}')">${icon("refresh")} ${t("common.retry")}</button>
     </div>`;
 }
 
@@ -177,15 +461,15 @@ const views = {
         <section class="status-panel">
           <div class="status-content">
             <div class="status-title">
-              <h2 id="statusHeadline">Router gotowy</h2>
+              <h2 id="statusHeadline">${t("dashboard.ready")}</h2>
               <span id="wanStatusBadge">${statusBadge("Up")}</span>
             </div>
             <p class="status-copy" id="statusCopy">
-              Podgląd łącza, urządzeń i Wi-Fi aktualizuje się automatycznie przez Server-Sent Events.
+              ${t("dashboard.statusCopy")}
             </p>
             <div class="status-actions">
-              <button class="btn btn-primary" id="refreshSummaryBtn" type="button">${icon("refresh")} Odśwież</button>
-              <button class="btn btn-secondary" type="button" data-jump-view="diagnostics">${icon("terminal")} Diagnostyka</button>
+              <button class="btn btn-primary" id="refreshSummaryBtn" type="button">${icon("refresh")} ${t("common.refresh")}</button>
+              <button class="btn btn-secondary" type="button" data-jump-view="diagnostics">${icon("terminal")} ${t("nav.diagnostics")}</button>
             </div>
             <div class="signal-strip">
               <span class="badge badge-neutral" id="wanTypePill">WAN: -</span>
@@ -202,10 +486,10 @@ const views = {
           <section class="panel">
             <div class="panel-title">
               <div>
-                <h3>Sieci Wi-Fi</h3>
-              <p>Aktualny broadcast SSID</p>
+                <h3>${t("dashboard.wifiTitle")}</h3>
+              <p>${t("dashboard.wifiSub")}</p>
               </div>
-              <button class="icon-btn" type="button" data-jump-view="wifi" title="Edytuj Wi-Fi" aria-label="Edytuj Wi-Fi">${icon("wifi")}</button>
+              <button class="icon-btn" type="button" data-jump-view="wifi" title="${t("dashboard.editWifi")}" aria-label="${t("dashboard.editWifi")}">${icon("wifi")}</button>
             </div>
             <div class="wifi-card-list">
               <div class="wifi-band">
@@ -222,13 +506,13 @@ const views = {
           <section class="panel">
             <div class="panel-title">
               <div>
-              <h3>Ostatnie urządzenia</h3>
-              <p>Najbardziej aktywni klienci</p>
+              <h3>${t("dashboard.devicesTitle")}</h3>
+              <p>${t("dashboard.devicesSub")}</p>
               </div>
-              <button class="icon-btn" type="button" data-jump-view="devices" title="Lista urządzeń" aria-label="Lista urządzeń">${icon("devices")}</button>
+              <button class="icon-btn" type="button" data-jump-view="devices" title="${t("dashboard.devicesLink")}" aria-label="${t("dashboard.devicesLink")}">${icon("devices")}</button>
             </div>
             <div id="devicePreview" class="device-preview-list">
-              <div class="device-preview"><span><small>Brak danych</small><strong>-</strong></span></div>
+              <div class="device-preview"><span><small>${t("common.noData")}</small><strong>-</strong></span></div>
             </div>
           </section>
         </aside>
@@ -236,19 +520,19 @@ const views = {
 
       <div class="metric-grid">
         <article class="metric-card">
-          <div class="metric-label">Status WAN <span id="wanDot">${statusBadge("Up")}</span></div>
+          <div class="metric-label">${t("dashboard.statusWan")} <span id="wanDot">${statusBadge("Up")}</span></div>
           <strong class="metric-value" id="wanStatus">-</strong>
           <p class="metric-sub" id="wanType">-</p>
         </article>
         <article class="metric-card">
-          <div class="metric-label">Czas pracy ${icon("system")}</div>
+          <div class="metric-label">${t("dashboard.uptime")} ${icon("system")}</div>
           <strong class="metric-value" id="uptimeBig">-</strong>
-          <p class="metric-sub">Od ostatniego restartu</p>
+          <p class="metric-sub">${t("dashboard.uptimeSub")}</p>
         </article>
         <article class="metric-card">
-          <div class="metric-label">Urządzenia ${icon("devices")}</div>
+          <div class="metric-label">${t("dashboard.devicesMetric")} ${icon("devices")}</div>
           <strong class="metric-value" id="devCount">-</strong>
-          <p class="metric-sub">Aktywne klienty</p>
+          <p class="metric-sub">${t("dashboard.devicesMetricSub")}</p>
         </article>
         <article class="metric-card compact">
           <div class="metric-label">IPv4 WAN ${icon("network")}</div>
@@ -261,8 +545,8 @@ const views = {
         <section class="chart-panel">
           <div class="panel-title">
             <div>
-              <h3>Pobieranie</h3>
-              <p>Ostatnie 30 próbek</p>
+              <h3>${t("dashboard.download")}</h3>
+              <p>${t("dashboard.samples")}</p>
             </div>
             <strong class="throughput-value" id="rxNow">-</strong>
           </div>
@@ -271,8 +555,8 @@ const views = {
         <section class="chart-panel">
           <div class="panel-title">
             <div>
-              <h3>Wysyłanie</h3>
-              <p>Ostatnie 30 próbek</p>
+              <h3>${t("dashboard.upload")}</h3>
+              <p>${t("dashboard.samples")}</p>
             </div>
             <strong class="throughput-value" id="txNow">-</strong>
           </div>
@@ -284,12 +568,12 @@ const views = {
       updateDashboard();
       $("#refreshSummaryBtn").onclick = async (event) => {
         const button = event.currentTarget;
-          setBusy(button, true, `${icon("refresh")} Odśwież`);
+          setBusy(button, true, `${icon("refresh")} ${t("common.refresh")}`);
         try {
           await refreshSummary();
-          toast("Dashboard odświeżony");
+          toast(t("dashboard.refreshed"));
         } catch (error) {
-          toast(`Błąd: ${error.message}`, "err");
+          toast(`${t("common.errorPrefix")}: ${error.message}`, "err");
         } finally {
           setBusy(button, false);
         }
@@ -299,17 +583,17 @@ const views = {
   },
 
   wifi: {
-    render: () => `<section id="wifiPanel">${loadingPanel("Ładowanie Wi-Fi...")}</section>`,
+    render: () => `<section id="wifiPanel">${loadingPanel(t("common.loadingWifi"))}</section>`,
     onMount: async () => {
       const wifi = await api("/api/admin/wifi");
       $("#wifiPanel").innerHTML = `
         <form id="wifiForm" class="form-panel">
           <div class="panel-title">
             <div>
-              <h2>Konfiguracja Wi-Fi</h2>
-              <p>Zmiany są zapisywane w mockowym stanie routera.</p>
+              <h2>${t("wifi.title")}</h2>
+              <p>${t("wifi.sub")}</p>
             </div>
-            <button class="btn btn-secondary" id="wifiReload" type="button">${icon("refresh")} Cofnij</button>
+            <button class="btn btn-secondary" id="wifiReload" type="button">${icon("refresh")} ${t("common.back")}</button>
           </div>
 
           <div class="form-grid">
@@ -322,39 +606,39 @@ const views = {
               <input class="field" name="ssid_5g" value="${escapeHTML(wifi.ssid_5g)}" required />
             </label>
             <div class="field-stack span-2">
-              <label for="wifiPassword">Hasło Wi-Fi</label>
+              <label for="wifiPassword">${t("wifi.password")}</label>
               <span class="password-row">
                 <input id="wifiPassword" class="field" name="password" type="password" value="${escapeHTML(wifi.password)}" required />
-                <button id="togglePassword" class="icon-btn" type="button" title="Pokaż hasło" aria-label="Pokaż hasło">${icon("eye")}</button>
+                <button id="togglePassword" class="icon-btn" type="button" title="${t("wifi.showPassword")}" aria-label="${t("wifi.showPassword")}">${icon("eye")}</button>
               </span>
             </div>
             <label>
-              <span>Kanal 2.4 GHz</span>
+              <span>${t("wifi.channel24")}</span>
               <select class="select" name="channel_2g">
                 ${["auto", "1", "6", "11"].map((channel) => `<option value="${channel}" ${channel === wifi.channel_2g ? "selected" : ""}>${channel}</option>`).join("")}
               </select>
             </label>
             <label>
-              <span>Kanal 5 GHz</span>
+              <span>${t("wifi.channel5")}</span>
               <select class="select" name="channel_5g">
                 ${["auto", "36", "40", "44", "48", "149"].map((channel) => `<option value="${channel}" ${channel === wifi.channel_5g ? "selected" : ""}>${channel}</option>`).join("")}
               </select>
             </label>
             <label class="span-2">
-              <span>SSID gościa</span>
+              <span>${t("wifi.guestSsid")}</span>
               <input class="field" name="guest_ssid" value="${escapeHTML(wifi.guest_ssid)}" />
             </label>
           </div>
 
           <div class="toggle-grid">
-            ${switchControl("enabled_2g", "2.4 GHz", "Sieć kompatybilna", wifi.enabled_2g)}
-            ${switchControl("enabled_5g", "5 GHz", "Szybkie pasmo", wifi.enabled_5g)}
-            ${switchControl("guest_enabled", "Sieć gościnna", "Izolowany dostęp", wifi.guest_enabled)}
+            ${switchControl("enabled_2g", "2.4 GHz", t("wifi.compat"), wifi.enabled_2g)}
+            ${switchControl("enabled_5g", "5 GHz", t("wifi.fastBand"), wifi.enabled_5g)}
+            ${switchControl("guest_enabled", t("wifi.guest"), t("wifi.guestSub"), wifi.guest_enabled)}
           </div>
 
           <div class="button-row">
-            <button id="wifiSave" class="btn btn-primary" type="submit">${icon("save")} Zapisz Wi-Fi</button>
-            <button class="btn btn-secondary" type="button" data-jump-view="dashboard">${icon("dashboard")} Dashboard</button>
+            <button id="wifiSave" class="btn btn-primary" type="submit">${icon("save")} ${t("wifi.save")}</button>
+            <button class="btn btn-secondary" type="button" data-jump-view="dashboard">${icon("dashboard")} ${t("common.dashboard")}</button>
           </div>
         </form>`;
 
@@ -368,28 +652,28 @@ const views = {
   },
 
   network: {
-    render: () => `<section id="networkPanel">${loadingPanel("Ładowanie sieci...")}</section>`,
+    render: () => `<section id="networkPanel">${loadingPanel(t("common.loadingNetwork"))}</section>`,
     onMount: async () => {
       const network = await api("/api/admin/network");
       $("#networkPanel").innerHTML = `
         <form id="networkForm" class="form-panel">
           <div class="panel-title">
             <div>
-              <h2>Adresacja LAN</h2>
-              <p>DHCP i DNS dla lokalnej sieci routera.</p>
+              <h2>${t("network.title")}</h2>
+              <p>${t("network.sub")}</p>
             </div>
           </div>
           <div class="form-grid">
-            ${field("lan_ip", "Adres LAN routera", network.lan_ip)}
-            ${field("lan_subnet", "Maska podsieci", network.lan_subnet)}
-            ${field("dhcp_start", "DHCP od", network.dhcp_start)}
-            ${field("dhcp_end", "DHCP do", network.dhcp_end)}
-            ${field("primary_dns", "DNS główny", network.primary_dns)}
-            ${field("secondary_dns", "DNS zapasowy", network.secondary_dns)}
+            ${field("lan_ip", t("network.lanIp"), network.lan_ip)}
+            ${field("lan_subnet", t("network.subnet"), network.lan_subnet)}
+            ${field("dhcp_start", t("network.dhcpStart"), network.dhcp_start)}
+            ${field("dhcp_end", t("network.dhcpEnd"), network.dhcp_end)}
+            ${field("primary_dns", t("network.primaryDns"), network.primary_dns)}
+            ${field("secondary_dns", t("network.secondaryDns"), network.secondary_dns)}
           </div>
           <div class="button-row">
-            <button id="networkSave" class="btn btn-primary" type="submit">${icon("save")} Zapisz sieć</button>
-            <button class="btn btn-secondary" type="button" data-jump-view="dashboard">${icon("dashboard")} Dashboard</button>
+            <button id="networkSave" class="btn btn-primary" type="submit">${icon("save")} ${t("network.save")}</button>
+            <button class="btn btn-secondary" type="button" data-jump-view="dashboard">${icon("dashboard")} ${t("common.dashboard")}</button>
           </div>
         </form>`;
       $("#networkForm").onsubmit = saveNetwork;
@@ -401,25 +685,25 @@ const views = {
       <section class="table-panel">
         <div class="table-toolbar">
           <div>
-            <h2>Podłączone urządzenia</h2>
-            <p class="muted">Tabela odswieza sie automatycznie co 3 sekundy.</p>
+            <h2>${t("devices.title")}</h2>
+            <p class="muted">${t("devices.sub")}</p>
           </div>
-          <button id="refreshDevices" class="btn btn-secondary" type="button">${icon("refresh")} Odśwież</button>
+          <button id="refreshDevices" class="btn btn-secondary" type="button">${icon("refresh")} ${t("common.refresh")}</button>
         </div>
         <div class="table-wrap">
           <table class="data-table" id="devicesTable">
             <thead>
               <tr>
-                <th>Nazwa</th>
+                <th>${t("devices.name")}</th>
                 <th>IP</th>
                 <th>MAC</th>
-                <th>Interfejs</th>
+                <th>${t("devices.interface")}</th>
                 <th>RSSI</th>
                 <th>RX</th>
                 <th>TX</th>
               </tr>
             </thead>
-            <tbody><tr><td colspan="7" class="muted">Ładowanie...</td></tr></tbody>
+            <tbody><tr><td colspan="7" class="muted">${t("common.loading")}</td></tr></tbody>
           </table>
         </div>
       </section>`,
@@ -439,21 +723,21 @@ const views = {
       <section class="form-panel">
         <div class="panel-title">
           <div>
-            <h2>Diagnostyka łącza</h2>
-            <p>Host jest walidowany po stronie serwera. Wynik pojawi sie w terminalu ponizej.</p>
+            <h2>${t("diagnostics.title")}</h2>
+            <p>${t("diagnostics.sub")}</p>
           </div>
         </div>
         <div class="diagnostic-grid">
           <label>
-            <span>Host docelowy</span>
-            <input id="diagHost" class="field" value="8.8.8.8" placeholder="np. 8.8.8.8" />
+            <span>${t("diagnostics.host")}</span>
+            <input id="diagHost" class="field" value="8.8.8.8" placeholder="${t("diagnostics.placeholder")}" />
           </label>
           <button id="diagPing" class="btn btn-primary" type="button">${icon("terminal")} Ping</button>
           <button id="diagTrace" class="btn btn-secondary" type="button">${icon("network")} Traceroute</button>
         </div>
       </section>
       <section class="terminal-panel">
-        <pre id="diagOut" class="term">Wybierz test diagnostyczny.</pre>
+        <pre id="diagOut" class="term">${t("diagnostics.ready")}</pre>
       </section>`,
     onMount: () => {
       $("#diagPing").onclick = () => runDiagnostic("ping");
@@ -466,16 +750,16 @@ const views = {
       <section class="terminal-panel">
         <div class="table-toolbar">
           <div>
-            <h2>Live log</h2>
-            <p class="muted">Nowe zdarzenia wpadaja przez SSE.</p>
+            <h2>${t("logs.title")}</h2>
+            <p class="muted">${t("logs.sub")}</p>
           </div>
           <div class="toolbar">
             <label class="switch-card">
               <input id="logAutoScroll" type="checkbox" checked />
               <span class="switch-track" aria-hidden="true"></span>
-              <span><strong>Auto-scroll</strong><small>Trzymaj dół</small></span>
+              <span><strong>${t("logs.autoscroll")}</strong><small>${t("logs.keepBottom")}</small></span>
             </label>
-            <button id="clearLogs" class="btn btn-secondary" type="button">${icon("trash")} Wyczyść widok</button>
+            <button id="clearLogs" class="btn btn-secondary" type="button">${icon("trash")} ${t("logs.clear")}</button>
           </div>
         </div>
         <pre id="logOut" class="term"></pre>
@@ -494,7 +778,7 @@ const views = {
   },
 
   system: {
-    render: () => `<section id="systemPanel">${loadingPanel("Ładowanie systemu...")}</section>`,
+    render: () => `<section id="systemPanel">${loadingPanel(t("common.loadingSystem"))}</section>`,
     onMount: async () => {
       const system = await api("/api/admin/system");
       $("#systemPanel").innerHTML = `
@@ -502,14 +786,14 @@ const views = {
           <section class="panel">
             <div class="panel-title">
               <div>
-                <h2>Urządzenie</h2>
-                <p>Firmware i identyfikatory sprzetowe.</p>
+                <h2>${t("system.title")}</h2>
+                <p>${t("system.sub")}</p>
               </div>
             </div>
             <div class="detail-list">
               ${detail("Model", system.model)}
-              ${detail("Numer seryjny", system.serial)}
-              ${detail("Adres MAC", system.mac)}
+              ${detail(t("system.serial"), system.serial)}
+              ${detail(t("system.mac"), system.mac)}
               ${detail("Firmware", system.firmware)}
               ${detail("Bootloader", system.bootloader)}
               ${detail("Uptime", system.uptime)}
@@ -519,22 +803,22 @@ const views = {
           <section class="panel">
             <div class="panel-title">
               <div>
-                <h2>Akcje serwisowe</h2>
-                <p>Operacje symulowane przez mock backend.</p>
+                <h2>${t("system.actions")}</h2>
+                <p>${t("system.actionsSub")}</p>
               </div>
             </div>
             <div class="danger-grid">
               <div class="action-tile">
                 <span>
-                  <strong>Restart routera</strong>
-                  <p>Resetuje licznik uptime po kilku sekundach.</p>
+                  <strong>${t("system.restartTitle")}</strong>
+                  <p>${t("system.restartSub")}</p>
                 </span>
                 <button id="restartRouter" class="btn btn-secondary" type="button">${icon("refresh")} Restart</button>
               </div>
               <div class="action-tile">
                 <span>
-                  <strong>Reset fabryczny</strong>
-                  <p>Przywraca domyślne Wi-Fi, sieć i stan urządzenia.</p>
+                  <strong>${t("system.factoryTitle")}</strong>
+                  <p>${t("system.factorySub")}</p>
                 </span>
                 <button id="factoryReset" class="btn btn-danger" type="button">${icon("trash")} Reset</button>
               </div>
@@ -576,7 +860,7 @@ function detail(label, value) {
 async function saveWifi(event) {
   event.preventDefault();
   const button = $("#wifiSave");
-  setBusy(button, true, `${icon("save")} Zapisz Wi-Fi`);
+  setBusy(button, true, `${icon("save")} ${t("wifi.save")}`);
   const data = new FormData(event.currentTarget);
   const body = Object.fromEntries(["ssid_2g", "ssid_5g", "password", "channel_2g", "channel_5g", "guest_ssid"]
     .map((key) => [key, data.get(key)]));
@@ -587,9 +871,9 @@ async function saveWifi(event) {
   try {
     await api("/api/admin/wifi", { method: "POST", body });
     await refreshSummary();
-    toast("Wi-Fi zapisane");
+    toast(t("wifi.saved"));
   } catch (error) {
-    toast(`Błąd: ${error.message}`, "err");
+    toast(`${t("common.errorPrefix")}: ${error.message}`, "err");
   } finally {
     setBusy(button, false);
   }
@@ -598,14 +882,14 @@ async function saveWifi(event) {
 async function saveNetwork(event) {
   event.preventDefault();
   const button = $("#networkSave");
-  setBusy(button, true, `${icon("save")} Zapisz sieć`);
+  setBusy(button, true, `${icon("save")} ${t("network.save")}`);
   const body = Object.fromEntries(new FormData(event.currentTarget).entries());
 
   try {
     await api("/api/admin/network", { method: "POST", body });
-    toast("Sieć zapisana");
+    toast(t("network.saved"));
   } catch (error) {
-    toast(`Błąd: ${error.message}`, "err");
+    toast(`${t("common.errorPrefix")}: ${error.message}`, "err");
   } finally {
     setBusy(button, false);
   }
@@ -626,7 +910,7 @@ async function renderDevicePreview() {
         ${ifaceBadge(device.iface)}
       </div>`).join("");
   } catch {
-    target.innerHTML = `<div class="device-preview"><span><small>Nie udało się pobrać</small><strong>Urządzenia</strong></span></div>`;
+    target.innerHTML = `<div class="device-preview"><span><small>${t("devices.fetchError")}</small><strong>${t("nav.devices")}</strong></span></div>`;
   }
 }
 
@@ -638,7 +922,7 @@ function renderDevicesTable(response) {
       <td class="mono">${escapeHTML(device.ip)}</td>
       <td class="mono">${escapeHTML(device.mac)}</td>
       <td>${ifaceBadge(device.iface)}</td>
-      <td>${device.rssi == null ? "<span class=\"muted\">kablowo</span>" : `${escapeHTML(device.rssi)} dBm`}</td>
+      <td>${device.rssi == null ? `<span class="muted">${t("status.wired")}</span>` : `${escapeHTML(device.rssi)} dBm`}</td>
       <td class="mono">${formatMbps(device.rx)}</td>
       <td class="mono">${formatMbps(device.tx)}</td>
     </tr>`).join("");
@@ -647,13 +931,13 @@ function renderDevicesTable(response) {
 async function runDiagnostic(kind) {
   const host = $("#diagHost").value.trim();
   const output = $("#diagOut");
-  output.textContent = `$ ${kind} ${host}\n[uruchamianie...]`;
+  output.textContent = `$ ${kind} ${host}\n[${t("common.starting")}]`;
 
   try {
     const data = await api(`/api/admin/diagnostics/${kind}`, { method: "POST", body: { host } });
-    output.textContent = data.output || "(brak wyjścia)";
+    output.textContent = data.output || t("common.noOutput");
   } catch (error) {
-    output.textContent = `Błąd: ${error.message}`;
+    output.textContent = `${t("common.errorPrefix")}: ${error.message}`;
   }
 }
 
@@ -670,25 +954,25 @@ function appendLogLine(entry) {
 }
 
 async function restartRouter() {
-  if (!window.confirm("Zrestartować router?")) return;
+  if (!window.confirm(t("system.restartConfirm"))) return;
   try {
     await api("/api/admin/restart", { method: "POST" });
-    toast("Restart trwa");
+    toast(t("system.restartToast"));
     setTimeout(refreshSummary, 6500);
   } catch (error) {
-    toast(`Błąd: ${error.message}`, "err");
+    toast(`${t("common.errorPrefix")}: ${error.message}`, "err");
   }
 }
 
 async function factoryReset() {
-  if (!window.confirm("Przywrócić ustawienia fabryczne? Konfiguracja zostanie utracona.")) return;
+  if (!window.confirm(t("system.factoryConfirm"))) return;
   try {
     await api("/api/admin/factory_reset", { method: "POST" });
     await refreshSummary();
-    toast("Reset fabryczny wykonany");
+    toast(t("system.factoryToast"));
     mount("system");
   } catch (error) {
-    toast(`Błąd: ${error.message}`, "err");
+    toast(`${t("common.errorPrefix")}: ${error.message}`, "err");
   }
 }
 
@@ -704,8 +988,8 @@ async function mount(name) {
 
   state.view = name;
   const [title, subtitle] = viewMeta[name];
-  $("#viewTitle").textContent = title;
-  $("#viewSub").textContent = subtitle;
+  $("#viewTitle").textContent = t(title);
+  $("#viewSub").textContent = t(subtitle);
   $$(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.view === name));
   $("#viewport").innerHTML = view.render();
   closeMobileMenu();
@@ -735,10 +1019,10 @@ function updateDashboard() {
   const status = wan.status || "Down";
   const online = text(status).toLowerCase() === "up";
 
-  $("#statusHeadline").textContent = online ? "Połączenie działa stabilnie" : "Połączenie wymaga uwagi";
+  $("#statusHeadline").textContent = online ? t("dashboard.headlineOnline") : t("dashboard.headlineOffline");
   $("#statusCopy").textContent = online
-    ? "WAN jest online, a pasma Wi-Fi są dostępne dla domowych urządzeń."
-    : "WAN nie odpowiada. Zacznij od diagnostyki albo restartu routera.";
+    ? t("dashboard.copyOnline")
+    : t("dashboard.copyOffline");
   $("#wanStatusBadge").innerHTML = statusBadge(status);
   $("#wanDot").innerHTML = statusBadge(status);
   $("#wanStatus").textContent = status;
@@ -809,8 +1093,16 @@ function bindShell() {
   $("#sidebarScrim").onclick = closeMobileMenu;
 }
 
+function bindLanguageControls() {
+  $$("[data-lang]").forEach((button) => {
+    button.onclick = () => setLanguage(button.dataset.lang);
+  });
+}
+
 async function boot() {
   initTheme();
+  applyLanguage();
+  bindLanguageControls();
 
   let user = null;
   try {
@@ -828,7 +1120,7 @@ async function boot() {
         await login($("#loginUser").value, $("#loginPass").value);
         window.location.reload();
       } catch (error) {
-        $("#loginError").textContent = error.data?.error || "Błąd logowania";
+        $("#loginError").textContent = error.data?.error || t("login.error");
         $("#loginError").classList.remove("hidden");
       }
     };
@@ -842,6 +1134,7 @@ async function boot() {
   $(".avatar").textContent = text(user).slice(0, 1).toUpperCase() || "A";
 
   bindShell();
+  applyLanguage();
   await refreshSummary();
   await mount("dashboard");
   startSSE();

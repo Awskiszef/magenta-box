@@ -17,11 +17,15 @@
           <small>router control center</small>
         </span>
       </div>
+      <div class="language-toggle language-toggle-login" role="group" aria-label="Language">
+        <button type="button" data-lang="pl">PL</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
 
       <div class="login-copy">
-        <p class="eyebrow">Panel administracyjny</p>
-          <h1 id="loginTitle">Zarządzaj siecią bez zgadywania.</h1>
-        <p>Live status, konfiguracja Wi-Fi, diagnostyka i logi w jednym czystym widoku.</p>
+        <p class="eyebrow" data-i18n="login.eyebrow">Panel administracyjny</p>
+        <h1 id="loginTitle" data-i18n="login.title">Zarządzaj siecią bez zgadywania.</h1>
+        <p data-i18n="login.copy">Live status, konfiguracja Wi-Fi, diagnostyka i logi w jednym czystym widoku.</p>
       </div>
 
       <form id="loginForm" class="login-form">
@@ -30,18 +34,18 @@
           <input id="loginUser" name="username" type="text" autocomplete="username" required />
         </label>
         <label>
-          <span>Hasło</span>
+          <span data-i18n="login.password">Hasło</span>
           <input id="loginPass" name="password" type="password" autocomplete="current-password" required />
         </label>
         <p id="loginError" class="form-alert hidden" role="alert"></p>
-        <button class="btn btn-primary btn-wide" type="submit">Zaloguj</button>
-        <p class="login-hint">Demo: <code>admin</code> / <code>admin</code></p>
+        <button class="btn btn-primary btn-wide" type="submit" data-i18n="login.submit">Zaloguj</button>
+        <p class="login-hint"><span data-i18n="login.demo">Demo:</span> <code>admin</code> / <code>admin</code></p>
       </form>
     </section>
   </div>
 
   <div id="appShell" class="app-shell hidden">
-    <aside id="sidebar" class="sidebar" aria-label="Nawigacja">
+    <aside id="sidebar" class="sidebar" aria-label="Nawigacja" data-i18n-aria-label="aria.sidebar">
       <div class="sidebar-brand">
         <span class="brand-mark" aria-hidden="true">T</span>
         <span>
@@ -50,50 +54,54 @@
         </span>
       </div>
 
-      <nav class="nav-list" aria-label="Główne widoki">
+      <nav class="nav-list" aria-label="Główne widoki" data-i18n-aria-label="aria.nav">
         <button class="nav-item active" type="button" data-view="dashboard">
           <span class="icon" data-icon="dashboard" aria-hidden="true"></span>
-          <span>Dashboard</span>
+          <span data-i18n="nav.dashboard">Dashboard</span>
         </button>
         <button class="nav-item" type="button" data-view="wifi">
           <span class="icon" data-icon="wifi" aria-hidden="true"></span>
-          <span>Wi-Fi</span>
+          <span data-i18n="nav.wifi">Wi-Fi</span>
         </button>
         <button class="nav-item" type="button" data-view="network">
           <span class="icon" data-icon="network" aria-hidden="true"></span>
-          <span>Sieć</span>
+          <span data-i18n="nav.network">Sieć</span>
         </button>
         <button class="nav-item" type="button" data-view="devices">
           <span class="icon" data-icon="devices" aria-hidden="true"></span>
-          <span>Urządzenia</span>
+          <span data-i18n="nav.devices">Urządzenia</span>
         </button>
         <button class="nav-item" type="button" data-view="diagnostics">
           <span class="icon" data-icon="tools" aria-hidden="true"></span>
-          <span>Diagnostyka</span>
+          <span data-i18n="nav.diagnostics">Diagnostyka</span>
         </button>
         <button class="nav-item" type="button" data-view="logs">
           <span class="icon" data-icon="logs" aria-hidden="true"></span>
-          <span>Logi</span>
+          <span data-i18n="nav.logs">Logi</span>
         </button>
         <button class="nav-item" type="button" data-view="system">
           <span class="icon" data-icon="system" aria-hidden="true"></span>
-          <span>System</span>
+          <span data-i18n="nav.system">System</span>
         </button>
       </nav>
 
       <div class="sidebar-footer">
+        <div class="language-toggle" role="group" aria-label="Language">
+          <button type="button" data-lang="pl">PL</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
         <div class="user-chip">
           <span class="avatar" aria-hidden="true">A</span>
           <span>
-            <small>Zalogowany</small>
+            <small data-i18n="sidebar.logged">Zalogowany</small>
             <strong id="navUser">-</strong>
           </span>
         </div>
         <div class="sidebar-actions">
-          <button id="darkToggle" class="icon-btn" type="button" title="Zmień motyw" aria-label="Zmień motyw">
+          <button id="darkToggle" class="icon-btn" type="button" title="Zmień motyw" aria-label="Zmień motyw" data-i18n-title="aria.theme" data-i18n-aria-label="aria.theme">
             <span class="icon" data-icon="moon" aria-hidden="true"></span>
           </button>
-          <button id="logoutBtn" class="icon-btn" type="button" title="Wyloguj" aria-label="Wyloguj">
+          <button id="logoutBtn" class="icon-btn" type="button" title="Wyloguj" aria-label="Wyloguj" data-i18n-title="aria.logout" data-i18n-aria-label="aria.logout">
             <span class="icon" data-icon="logout" aria-hidden="true"></span>
           </button>
         </div>
@@ -104,7 +112,7 @@
 
     <main class="workspace">
       <header class="topbar">
-          <button id="menuToggle" class="icon-btn mobile-only" type="button" title="Menu" aria-label="Otwórz menu">
+          <button id="menuToggle" class="icon-btn mobile-only" type="button" title="Menu" aria-label="Otwórz menu" data-i18n-aria-label="aria.menu">
           <span class="icon" data-icon="menu" aria-hidden="true"></span>
         </button>
         <div class="title-block">
@@ -113,7 +121,7 @@
         </div>
         <div class="topbar-status">
           <span id="liveDot" class="live-dot" aria-hidden="true"></span>
-          <span>live</span>
+          <span data-i18n="topbar.live">live</span>
           <strong id="uptimeBadge">--:--:--</strong>
         </div>
       </header>
