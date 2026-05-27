@@ -1,10 +1,12 @@
 # magenta.box — Telekom Router Demo
 
+> ⚠️ **Educational, non-commercial demo.** See [Disclaimer](#disclaimer--legal) below.
+
 Lokalne, w pełni działające demo panelu zarządzania routerem Telekom / T-Mobile (RDK-B / CCSP).
 Składa się z trzech warstw:
 
-1. **Oryginalny landing page** (`/`) — niezmieniony frontend z firmware'u operatora (Polska / Czechy / Grecja / …), zasilany mockowanym TR-181-like API.
-2. **Nowy panel administracyjny** (`/admin/`) — własny SPA w czystym JS/CSS, motyw Magenta, dark mode, mobile drawer, live update przez SSE.
+1. **Oryginalny landing page** (`/`) — frontend z firmware'u operatora (PL / CZ / GR / …), zasilany mockowanym TR-181-like API.
+2. **Własny panel administracyjny** (`/admin/`) — SPA w czystym JS/CSS, motyw Magenta, dark mode, mobile drawer, live update przez SSE.
 3. **Dwa wymienne backendy** — lekki stdlib (`mock_server.py`) i pełnoprawny FastAPI (`backend/`) z SQLite, JWT, bcrypt i pub/sub event hub.
 
 | | Landing `/` | Admin `/admin/` |
@@ -18,6 +20,30 @@ Składa się z trzech warstw:
 
 ---
 
+## Disclaimer & Legal
+
+**This repository is an educational, non-commercial demonstration project.**
+
+- **"Telekom"**, **"T-Mobile"**, **"Cosmote"**, **"Magenta"** and **"magenta.box"** are
+  registered trademarks of **Deutsche Telekom AG** and its affiliates. Use here is
+  strictly **nominative** (referring to the product being mocked) — no affiliation,
+  sponsorship or endorsement is implied.
+- The original landing page assets (`index.html`, `CSS/style.css`, `CSS/common.css`,
+  `JS/index.js`, `JS/translator.js`, `JS/utility.js`, `*PopUp.html`,
+  `open_source_license.html`, `languages/*.json`) and the **TeleNeo Web font**
+  (`CSS/fonts/TeleNeoWeb-*.woff2`) are property of **Deutsche Telekom AG**.
+  They are included **solely** to demonstrate that the mock backend renders the
+  original UI correctly. No claim of ownership is made.
+- All **original code** (the `admin/` SPA, both backends, the simulator, the
+  router illustration in `admin/router-panel.svg`, the screenshots) is © 2026
+  Awski and licensed under the **MIT License** for non-commercial use.
+
+**Rights holders**: If you are a representative of Deutsche Telekom AG (or any
+affiliate) and want any content removed, please open a GitHub issue or send a
+DMCA notice to GitHub — I will comply within 24 hours.
+
+---
+
 ## Spis treści
 
 - [Szybki start](#szybki-start)
@@ -27,7 +53,8 @@ Składa się z trzech warstw:
 - [Struktura repozytorium](#struktura-repozytorium)
 - [Persystencja stanu](#persystencja-stanu)
 - [Rozszerzanie](#rozszerzanie)
-- [Znane problemy](#znane-problemy)
+- [Bezpieczeństwo](#bezpieczeństwo)
+- [Disclaimer & Legal](#disclaimer--legal)
 
 ---
 
@@ -55,8 +82,8 @@ Po starcie (oba warianty) otwórz:
 
 | URL | Co robi |
 |---|---|
-| <http://127.0.0.1:8000/>          | Landing routera (oryginał Telekom) |
-| <http://127.0.0.1:8000/admin/>    | Panel admina — login `admin` / `admin` |
+| <http://127.0.0.1:8000/>           | Landing routera (oryginał Telekom) |
+| <http://127.0.0.1:8000/admin/>     | Panel admina — login `admin` / `admin` |
 | <http://127.0.0.1:8000/api/stream> | SSE — `event: tick`, `event: logs` |
 
 Przełączanie wariantu krajowego dla landing-page (motyw + branding):
@@ -74,12 +101,13 @@ Przełączanie wariantu krajowego dla landing-page (motyw + branding):
 
 | Kryterium | `mock_server.py` (stdlib) | `backend/` (FastAPI) |
 |---|---|---|
-| Zależności | brak | `requirements.txt` (FastAPI, SQLAlchemy, sse-starlette, passlib, python-jose, …) |
+| Zależności | brak | `requirements.txt` (FastAPI, SQLAlchemy, sse-starlette, bcrypt, PyJWT, …) |
 | Persystencja | `state.json` w roocie | SQLite (`router.db` w roocie) |
-| Auth | sesja in-memory, token w cookie | JWT (HS256) w cookie HttpOnly + bcrypt |
+| Auth | sesja in-memory, token w cookie | JWT (HS256, PyJWT) w cookie HttpOnly + natywne bcrypt |
 | Symulator | wątek w tle (`threading`) | async task (`asyncio`) |
 | SSE | bezpośrednio w handlerze (per-klient pętla) | `sse-starlette` + `EventHub` (pub/sub do wielu subskrybentów) |
-| Diagnostyka (`ping`/`tracert`) | `subprocess.run` blokujący | `asyncio.create_subprocess_exec` |
+| Diagnostyka (`ping`/`tracert`) | `subprocess.run` blokujący | `asyncio.create_subprocess_exec` + kill po timeout |
+| Cykl życia | główny wątek do Ctrl-C | `lifespan` context (proper startup + shutdown) |
 | Hot-reload | nie | `uvicorn --reload` |
 
 Oba backendy serwują **identyczny** SPA `admin/` i landing `index.html`, więc można je swobodnie podmieniać.
@@ -112,16 +140,16 @@ Oba backendy serwują **identyczny** SPA `admin/` i landing `index.html`, więc 
 
 | Method | Path | Opis |
 |---|---|---|
-| GET  | `/api/admin/summary`               | snapshot: WAN, Wi-Fi, throughput, devices_count, uptime |
-| GET/POST | `/api/admin/wifi`              | konfiguracja 2.4G/5G/guest (SSID, hasło, kanał, on/off) |
-| GET/POST | `/api/admin/network`           | LAN IP, maska, zakres DHCP, DNS |
-| GET  | `/api/admin/devices`               | lista klientów (driftuje co 2–5 s) |
-| GET  | `/api/admin/system`                | model, serial, firmware, MAC, uptime |
-| GET  | `/api/admin/logs`                  | ostatnie 200 wpisów |
-| POST | `/api/admin/restart`               | resetuje uptime po 6 s |
-| POST | `/api/admin/factory_reset`         | dropuje DB / nadpisuje state.json |
-| POST | `/api/admin/diagnostics/ping`      | `{ host }` → realny `ping` po stronie serwera |
-| POST | `/api/admin/diagnostics/traceroute`| `{ host }` → `tracert` / `traceroute` |
+| GET  | `/api/admin/summary`                | snapshot: WAN, Wi-Fi, throughput, devices_count, uptime |
+| GET/POST | `/api/admin/wifi`               | konfiguracja 2.4G/5G/guest (SSID, hasło, kanał, on/off) |
+| GET/POST | `/api/admin/network`            | LAN IP, maska, zakres DHCP, DNS |
+| GET  | `/api/admin/devices`                | lista klientów (driftuje co 2–5 s) |
+| GET  | `/api/admin/system`                 | model, serial, firmware, MAC, uptime |
+| GET  | `/api/admin/logs`                   | ostatnie 200 wpisów |
+| POST | `/api/admin/restart`                | resetuje uptime po 6 s |
+| POST | `/api/admin/factory_reset`          | dropuje DB / nadpisuje state.json |
+| POST | `/api/admin/diagnostics/ping`       | `{ host }` → realny `ping` po stronie serwera (regex whitelist hosta) |
+| POST | `/api/admin/diagnostics/traceroute` | `{ host }` → `tracert` / `traceroute` |
 
 ### SSE
 
@@ -156,7 +184,7 @@ Dodatkowo:
 - **Dark mode** — przełącznik w stopce sidebara, zapisany w `localStorage`.
 - **Mobile drawer** — sidebar zamyka się w drawer + scrim poniżej 900 px.
 - **Toasty** — `toast()` w prawym dolnym rogu, animacja in/out.
-- **XSS-safe** — wszystkie wartości z API trafiają do DOM przez `escapeHTML(...)` (kontrastuje z oryginalnym landingiem, który używa raw `{%# %}`).
+- **XSS-safe** — wszystkie wartości z API trafiają do DOM przez `escapeHTML(...)`.
 - **Ikony** — pojedyncze inline SVG osadzone w CSS jako `mask-image` (zero zewnętrznych zależności, kolorowane przez `currentColor`).
 
 ![Dashboard view](./admin-dashboard-view.png)
@@ -168,20 +196,20 @@ Dodatkowo:
 
 ```
 T-MOBILE/
-├── index.html                         # Oryginalny landing routera (Telekom)
-├── open_source_license.html           # Modal Open Source
+├── index.html                         # Oryginalny landing routera (Telekom — patrz Disclaimer)
+├── open_source_license.html           # Modal Open Source (Telekom)
 ├── restartPopUp.html                  # Modal Restart (idle)
 ├── restartUpgradePopUp.html           # Modal Restart (during upgrade)
 ├── resetPopUp.html                    # Modal Factory reset (idle)
 ├── resetUpgradePopUp.html             # Modal Factory reset (during upgrade)
 │
-├── CSS/                               # Oryginalne style Telekom
+├── CSS/                               # Oryginalne style Telekom (patrz Disclaimer)
 │   ├── bootstrap.min.css
 │   ├── common.css
 │   ├── style.css
-│   └── fonts/                         # TeleNeo Web (Regular / Bold / ExtraBold)
+│   └── fonts/                         # TeleNeo Web (© Deutsche Telekom AG)
 │
-├── JS/                                # Oryginalne skrypty Telekom
+├── JS/                                # Oryginalne skrypty Telekom (patrz Disclaimer)
 │   ├── jquery.min.js
 │   ├── bootstrap.min.js
 │   ├── tmpl.js
@@ -194,24 +222,24 @@ T-MOBILE/
 │   ├── pl.json
 │   └── en_pl.json
 │
-├── admin/                             # Nowy panel administracyjny (SPA)
+├── admin/                             # ⭐ Własny panel administracyjny (SPA) — MIT
 │   ├── index.html                     # Shell + login screen
 │   ├── admin.css                      # Custom CSS (Magenta theme, dark mode, mobile)
 │   ├── admin.js                       # Vanilla JS router widoków, SSE client, fetch API
 │   └── router-panel.svg               # Grafika hero w dashboardzie
 │
-├── mock_server.py                     # Backend #1 — stdlib (zero deps)
+├── mock_server.py                     # ⭐ Backend #1 — stdlib (zero deps) — MIT
 ├── state.json                         # Stan persystowany przez mock_server.py
 │
-├── backend/                           # Backend #2 — FastAPI (production-ish)
-│   ├── main.py                        # FastAPI app, mounty static, SSE endpoint
+├── backend/                           # ⭐ Backend #2 — FastAPI (production-ish) — MIT
+│   ├── main.py                        # FastAPI app, lifespan, mounty static, SSE endpoint
 │   ├── config.py                      # pydantic-settings (.env support)
 │   ├── database.py                    # async SQLAlchemy + sessionmaker
 │   ├── models.py                      # User, WifiConfig, NetworkConfig, SystemInfo,
 │   │                                  # WanStatus, Device, Log
 │   ├── schemas.py                     # Pydantic schemas
 │   ├── crud.py                        # init_db (seedy), get/update helpers
-│   ├── auth.py                        # JWT (HS256) + bcrypt password hashing
+│   ├── auth.py                        # PyJWT (HS256) + natywne bcrypt
 │   ├── event_hub.py                   # In-process pub/sub dla SSE
 │   ├── simulator.py                   # Async task: drift devices, publish events
 │   └── routers/
@@ -220,12 +248,15 @@ T-MOBILE/
 │       └── admin.py                   # /api/admin/*
 │
 ├── requirements.txt                   # Dla wariantu B (FastAPI)
-├── router.db                          # SQLite — tworzona automatycznie
+├── router.db                          # SQLite — tworzona automatycznie (gitignored)
 │
 ├── admin-dashboard.png                # Zrzuty ekranu (do README)
 ├── admin-dashboard-view.png
 └── admin-mobile-view.png
 ```
+
+⭐ = własna praca, MIT.  
+Pozostałe pliki — patrz [Disclaimer](#disclaimer--legal).
 
 ---
 
@@ -276,28 +307,42 @@ Dorzuć `languages/<lang>.json` i wpisz go do `languages/index.json`. Translator
 
 ---
 
-
----
-
 ## Bezpieczeństwo
 
 To jest **demo do testów lokalnych**, nie produkcja. W szczególności:
 
 - Domyślne hasło `admin` jest hardcoded w `crud.init_db()` / `mock_server.DEFAULT_STATE`.
-- `JWT_SECRET` ma fallback `super-secret-key-for-router-demo` — nadpisz przez ENV przed jakimkolwiek wystawieniem na sieć.
-- Cookie sesji ma `SameSite=Lax`, `HttpOnly`, ale **bez** `Secure` (bo HTTP localhost).
-- Diagnostyka wykonuje realne `ping`/`tracert` po stronie serwera. Whitelist hosta jest minimalna — nie wystawiaj endpointu publicznie.
+- `JWT_SECRET` ma fallback `super-secret-key-for-router-demo` — nadpisz przez ENV (`.env`) przed jakimkolwiek wystawieniem na sieć.
+- Cookie sesji ma `SameSite=Lax`, `HttpOnly`, ale **bez** `Secure` (bo HTTP localhost). Dla HTTPS dorzuć `secure=True` w `response.set_cookie(...)`.
+- Diagnostyka wykonuje realne `ping`/`tracert` po stronie serwera. Whitelist hosta to regex `^[A-Za-z0-9.\-:]{1,100}$` — nie wystawiaj endpointu publicznie bez dodatkowego ograniczenia.
 - CORS nie jest skonfigurowany — backend zakłada same-origin.
 
 Nie nasłuchuje na `0.0.0.0`, tylko `127.0.0.1`. Żeby wystawić poza localhost, zmień bind w `mock_server.py` (`HTTPServer(("0.0.0.0", port), ...)`) lub `uvicorn --host 0.0.0.0`. **Wcześniej** popraw powyższe punkty.
 
 ---
 
-## Licencja zasobów stron trzecich
+## Stack i podziękowania
 
-W `index.html` (oryginalny landing) używane są:
+**Własny kod** (MIT, © 2026 Awski):
+
+- Backend FastAPI (`backend/`) — async SQLAlchemy + PyJWT + bcrypt + sse-starlette
+- Backend stdlib (`mock_server.py`) — czysta biblioteka standardowa Pythona
+- Admin SPA (`admin/`) — vanilla JS + custom CSS, ~2000 linii, zero zewnętrznych zależności frontu
+
+**Open Source dependencies** (FastAPI wariant):
+
+- [FastAPI](https://fastapi.tiangolo.com/) (MIT) · [Starlette](https://www.starlette.io/) (BSD) · [SQLAlchemy](https://www.sqlalchemy.org/) (MIT)
+- [Pydantic](https://docs.pydantic.dev/) (MIT) · [PyJWT](https://pyjwt.readthedocs.io/) (MIT) · [bcrypt](https://github.com/pyca/bcrypt/) (Apache 2.0)
+- [sse-starlette](https://github.com/sysid/sse-starlette) (BSD) · [aiosqlite](https://github.com/omnilib/aiosqlite) (MIT) · [uvicorn](https://www.uvicorn.org/) (BSD)
+
+**Frontend landing (3rd-party, in original UI)**:
 
 - jQuery, Bootstrap 3, JavaScript Templates (`tmpl.js`) — MIT
-- TeleNeo Web — własność Deutsche Telekom AG (font dystrybuowany z firmware'em)
 
-Zasoby brand Telekom / Cosmote / Magenta nie są dołączone do tego repo.
+**Telekom assets** — patrz [Disclaimer & Legal](#disclaimer--legal).
+
+---
+
+## Kontakt
+
+Pytania, sugestie, PR-y mile widziane. Issues / DMCA notice: <https://github.com/Awskiszef/magenta-box/issues>
