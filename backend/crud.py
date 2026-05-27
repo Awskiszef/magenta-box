@@ -63,7 +63,7 @@ async def init_db(db: AsyncSession):
     res = await db.execute(select(models.Device))
     if not res.scalars().first():
         devices = [
-            {"name": "Awski-Laptop", "mac": "AA:BB:CC:11:22:33", "ip": "192.168.1.101", "iface": "wifi-5g", "rssi": -42, "rx": 145.2, "tx": 22.1},
+            {"name": "Dev-Laptop", "mac": "AA:BB:CC:11:22:33", "ip": "192.168.1.101", "iface": "wifi-5g", "rssi": -42, "rx": 145.2, "tx": 22.1},
             {"name": "iPhone-15", "mac": "AA:BB:CC:11:22:34", "ip": "192.168.1.102", "iface": "wifi-5g", "rssi": -58, "rx": 12.0, "tx": 3.4},
             {"name": "Smart-TV-LG", "mac": "AA:BB:CC:11:22:35", "ip": "192.168.1.103", "iface": "wifi-2g", "rssi": -67, "rx": 320.5, "tx": 5.2},
             {"name": "PS5-Console", "mac": "AA:BB:CC:11:22:36", "ip": "192.168.1.104", "iface": "ethernet", "rssi": None, "rx": 88.3, "tx": 14.7},
