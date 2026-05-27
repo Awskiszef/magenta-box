@@ -1,5 +1,7 @@
 # magenta.box — Telekom Router Demo
 
+> 🇵🇱 Polska (ten plik) · 🇬🇧 [English version](./README.en.md)
+
 > ⚠️ **Educational, non-commercial demo.** See [Disclaimer & Legal](#disclaimer--legal) below.
 
 Lokalne, w pełni działające demo panelu zarządzania routerem Telekom / T-Mobile (RDK-B / CCSP).
