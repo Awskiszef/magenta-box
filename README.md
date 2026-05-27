@@ -1,6 +1,6 @@
 # magenta.box — Telekom Router Demo
 
-> ⚠️ **Educational, non-commercial demo.** See [Disclaimer](#disclaimer--legal) below.
+> ⚠️ **Educational, non-commercial demo.** See [Disclaimer & Legal](#disclaimer--legal) below.
 
 Lokalne, w pełni działające demo panelu zarządzania routerem Telekom / T-Mobile (RDK-B / CCSP).
 Składa się z trzech warstw:
@@ -33,10 +33,7 @@ Składa się z trzech warstw:
   `open_source_license.html`, `languages/*.json`) and the **TeleNeo Web font**
   (`CSS/fonts/TeleNeoWeb-*.woff2`) are property of **Deutsche Telekom AG**.
   They are included **solely** to demonstrate that the mock backend renders the
-  original UI correctly. No claim of ownership is made.
-- All **original code** (the `admin/` SPA, both backends, the simulator, the
-  router illustration in `admin/router-panel.svg`, the screenshots) is © 2026
-  Awski and licensed under the **MIT License** for non-commercial use.
+  original UI correctly.
 
 **Rights holders**: If you are a representative of Deutsche Telekom AG (or any
 affiliate) and want any content removed, please open a GitHub issue or send a
@@ -46,6 +43,7 @@ DMCA notice to GitHub — I will comply within 24 hours.
 
 ## Spis treści
 
+- [Wymagania](#wymagania)
 - [Szybki start](#szybki-start)
 - [Wybór backendu](#wybór-backendu)
 - [Endpointy API](#endpointy-api)
@@ -54,7 +52,23 @@ DMCA notice to GitHub — I will comply within 24 hours.
 - [Persystencja stanu](#persystencja-stanu)
 - [Rozszerzanie](#rozszerzanie)
 - [Bezpieczeństwo](#bezpieczeństwo)
-- [Disclaimer & Legal](#disclaimer--legal)
+- [License](#license)
+
+---
+
+## Wymagania
+
+- **Python 3.10+** (testowane na 3.11, 3.12, 3.14)
+- `pip` i `venv` (Debian/Ubuntu: `sudo apt install python3-venv python3-pip`)
+- Opcjonalnie `iputils-ping` i `traceroute` dla widoku diagnostyki:
+
+  ```bash
+  sudo apt install iputils-ping traceroute    # Debian / Ubuntu
+  sudo dnf install iputils traceroute         # Fedora / RHEL
+  sudo pacman -S iputils traceroute           # Arch
+  ```
+
+  Bez tych pakietów panel diagnostyki pokaże `command not found` — reszta aplikacji działa.
 
 ---
 
@@ -62,21 +76,31 @@ DMCA notice to GitHub — I will comply within 24 hours.
 
 ### Wariant A — stdlib (zero zależności)
 
-Wystarczy Python 3.10+:
-
-```powershell
-python mock_server.py            # port 8000
-python mock_server.py 9000       # własny port
+```bash
+python3 mock_server.py            # port 8000
+python3 mock_server.py 9000       # własny port
 ```
 
 ### Wariant B — FastAPI (pełna baza danych)
 
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn backend.main:app --reload --port 8000
+```
+
+<details>
+<summary>Windows PowerShell — kliknij, żeby rozwinąć</summary>
+
 ```powershell
-python -m venv .venv
+py -3 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 uvicorn backend.main:app --reload --port 8000
 ```
+
+</details>
 
 Po starcie (oba warianty) otwórz:
 
@@ -95,6 +119,35 @@ Przełączanie wariantu krajowego dla landing-page (motyw + branding):
 ?partner=telekom-me | telekom-mk
 ```
 
+### Serwis systemd (opcjonalnie, dla wariantu B)
+
+Jeśli chcesz mieć backend jako usługę, dorzuć `/etc/systemd/system/magenta-box.service`:
+
+```ini
+[Unit]
+Description=magenta.box router demo
+After=network.target
+
+[Service]
+Type=simple
+User=awski
+WorkingDirectory=/home/awski/magenta-box
+Environment="PATH=/home/awski/magenta-box/.venv/bin"
+EnvironmentFile=-/home/awski/magenta-box/.env
+ExecStart=/home/awski/magenta-box/.venv/bin/uvicorn backend.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now magenta-box
+sudo systemctl status magenta-box
+journalctl -u magenta-box -f
+```
+
 ---
 
 ## Wybór backendu
@@ -106,7 +159,7 @@ Przełączanie wariantu krajowego dla landing-page (motyw + branding):
 | Auth | sesja in-memory, token w cookie | JWT (HS256, PyJWT) w cookie HttpOnly + natywne bcrypt |
 | Symulator | wątek w tle (`threading`) | async task (`asyncio`) |
 | SSE | bezpośrednio w handlerze (per-klient pętla) | `sse-starlette` + `EventHub` (pub/sub do wielu subskrybentów) |
-| Diagnostyka (`ping`/`tracert`) | `subprocess.run` blokujący | `asyncio.create_subprocess_exec` + kill po timeout |
+| Diagnostyka (`ping`/`traceroute`) | `subprocess.run` blokujący | `asyncio.create_subprocess_exec` + kill po timeout |
 | Cykl życia | główny wątek do Ctrl-C | `lifespan` context (proper startup + shutdown) |
 | Hot-reload | nie | `uvicorn --reload` |
 
@@ -149,7 +202,22 @@ Oba backendy serwują **identyczny** SPA `admin/` i landing `index.html`, więc 
 | POST | `/api/admin/restart`                | resetuje uptime po 6 s |
 | POST | `/api/admin/factory_reset`          | dropuje DB / nadpisuje state.json |
 | POST | `/api/admin/diagnostics/ping`       | `{ host }` → realny `ping` po stronie serwera (regex whitelist hosta) |
-| POST | `/api/admin/diagnostics/traceroute` | `{ host }` → `tracert` / `traceroute` |
+| POST | `/api/admin/diagnostics/traceroute` | `{ host }` → `traceroute` / `tracert` |
+
+Szybki test z curl (Linux):
+
+```bash
+# zapisz cookie sesji
+curl -c /tmp/mb.cookies -X POST http://127.0.0.1:8000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin"}'
+
+# użyj cookie do wywołań admin
+curl -b /tmp/mb.cookies http://127.0.0.1:8000/api/admin/summary | jq
+
+# SSE — strumień ticków i logów
+curl -N -b /tmp/mb.cookies http://127.0.0.1:8000/api/stream
+```
 
 ### SSE
 
@@ -195,7 +263,7 @@ Dodatkowo:
 ## Struktura repozytorium
 
 ```
-T-MOBILE/
+magenta-box/
 ├── index.html                         # Oryginalny landing routera (Telekom — patrz Disclaimer)
 ├── open_source_license.html           # Modal Open Source (Telekom)
 ├── restartPopUp.html                  # Modal Restart (idle)
@@ -229,9 +297,9 @@ T-MOBILE/
 │   └── router-panel.svg               # Grafika hero w dashboardzie
 │
 ├── mock_server.py                     # ⭐ Backend #1 — stdlib (zero deps) — MIT
-├── state.json                         # Stan persystowany przez mock_server.py
+├── state.json                         # Stan persystowany przez mock_server.py (gitignored)
 │
-├── backend/                           # ⭐ Backend #2 — FastAPI (production-ish) — MIT
+├── backend/                           # ⭐ Backend #2 — FastAPI — MIT
 │   ├── main.py                        # FastAPI app, lifespan, mounty static, SSE endpoint
 │   ├── config.py                      # pydantic-settings (.env support)
 │   ├── database.py                    # async SQLAlchemy + sessionmaker
@@ -252,11 +320,14 @@ T-MOBILE/
 │
 ├── admin-dashboard.png                # Zrzuty ekranu (do README)
 ├── admin-dashboard-view.png
-└── admin-mobile-view.png
+├── admin-mobile-view.png
+│
+├── LICENSE                            # MIT — z zakresem ograniczonym do oryginalnego kodu
+└── README.md                          # ten plik
 ```
 
 ⭐ = własna praca, MIT.  
-Pozostałe pliki — patrz [Disclaimer](#disclaimer--legal).
+Pozostałe pliki — patrz [Disclaimer & Legal](#disclaimer--legal).
 
 ---
 
@@ -272,16 +343,19 @@ Stan w **`router.db`** (SQLite via aiosqlite). Tabele tworzą się przy starcie 
 
 Reset bazy:
 
-```powershell
-Remove-Item router.db
+```bash
+rm -f router.db
 # kolejny start odtworzy schema + seed
 ```
 
-URL bazy nadpisać przez `.env`:
+Konfiguracja przez `.env` (obok `backend/`):
 
-```
-DATABASE_URL=sqlite+aiosqlite:///./other.db
-JWT_SECRET=change-me
+```bash
+cat > .env <<'EOF'
+DATABASE_URL=sqlite+aiosqlite:///./router.db
+JWT_SECRET=$(openssl rand -hex 32)
+JWT_EXPIRE_MINUTES=60
+EOF
 ```
 
 ---
@@ -312,12 +386,31 @@ Dorzuć `languages/<lang>.json` i wpisz go do `languages/index.json`. Translator
 To jest **demo do testów lokalnych**, nie produkcja. W szczególności:
 
 - Domyślne hasło `admin` jest hardcoded w `crud.init_db()` / `mock_server.DEFAULT_STATE`.
-- `JWT_SECRET` ma fallback `super-secret-key-for-router-demo` — nadpisz przez ENV (`.env`) przed jakimkolwiek wystawieniem na sieć.
+- `JWT_SECRET` ma fallback `super-secret-key-for-router-demo` — nadpisz przez ENV (`.env`) przed jakimkolwiek wystawieniem na sieć. Wygeneruj porządny: `openssl rand -hex 32`.
 - Cookie sesji ma `SameSite=Lax`, `HttpOnly`, ale **bez** `Secure` (bo HTTP localhost). Dla HTTPS dorzuć `secure=True` w `response.set_cookie(...)`.
-- Diagnostyka wykonuje realne `ping`/`tracert` po stronie serwera. Whitelist hosta to regex `^[A-Za-z0-9.\-:]{1,100}$` — nie wystawiaj endpointu publicznie bez dodatkowego ograniczenia.
+- Diagnostyka wykonuje realne `ping`/`traceroute` po stronie serwera. Whitelist hosta to regex `^[A-Za-z0-9.\-:]{1,100}$` — nie wystawiaj endpointu publicznie bez dodatkowego ograniczenia.
 - CORS nie jest skonfigurowany — backend zakłada same-origin.
 
-Nie nasłuchuje na `0.0.0.0`, tylko `127.0.0.1`. Żeby wystawić poza localhost, zmień bind w `mock_server.py` (`HTTPServer(("0.0.0.0", port), ...)`) lub `uvicorn --host 0.0.0.0`. **Wcześniej** popraw powyższe punkty.
+Domyślnie nasłuchuje na `127.0.0.1`. Żeby wystawić poza localhost, użyj `uvicorn --host 0.0.0.0` lub zmień bind w `mock_server.py`. **Wcześniej** popraw powyższe punkty.
+
+Reverse proxy (nginx) dla wariantu B:
+
+```nginx
+location / {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+location /api/stream {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_buffering off;
+    proxy_read_timeout 24h;
+}
+```
 
 ---
 
@@ -339,10 +432,26 @@ Nie nasłuchuje na `0.0.0.0`, tylko `127.0.0.1`. Żeby wystawić poza localhost,
 
 - jQuery, Bootstrap 3, JavaScript Templates (`tmpl.js`) — MIT
 
-**Telekom assets** — patrz [Disclaimer & Legal](#disclaimer--legal).
+---
+
+## License
+
+All original code written specifically for this project (`admin/`, `backend/`,
+`mock_server.py`, simulator code and custom SVG assets) is © 2026 Awski and
+licensed under the **MIT License** — see [`LICENSE`](./LICENSE) for the full
+text and exact scope.
+
+Third-party Telekom / T-Mobile assets (the landing page, TeleNeo fonts,
+trademarks, branding) are **not** covered by this license and remain the
+property of their respective rights holders. See
+[Disclaimer & Legal](#disclaimer--legal) for the rights-holder contact procedure.
+
+Vendored open-source libraries (jQuery, Bootstrap, tmpl.js, …) retain their
+original MIT licenses.
 
 ---
 
 ## Kontakt
 
-Pytania, sugestie, PR-y mile widziane. Issues / DMCA notice: <https://github.com/Awskiszef/magenta-box/issues>
+Pytania, sugestie, PR-y mile widziane. Issues / DMCA notice:
+<https://github.com/Awskiszef/magenta-box/issues>
